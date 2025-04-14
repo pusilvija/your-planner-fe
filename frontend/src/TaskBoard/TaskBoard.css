@@ -1,0 +1,7 @@
+.task-board {
+    display: flex; /* This makes the container a flexbox */
+    justify-content: flex-start; /* Align items to the left */
+    align-items: flex-start; /* Align items at the top */
+    overflow-x: auto; /* Allow horizontal scrolling if there are too many columns */
+    padding: 20px;
+  }
