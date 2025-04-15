@@ -12,6 +12,7 @@
 
 .task-card.dragging {
   background-color: rgb(207, 207, 207);
+  opacity: 0.7; 
 }
   
 .task-card:hover {
