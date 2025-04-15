@@ -1,10 +1,10 @@
 import './TaskCard.css';
 
 
-function TaskCard({ task }) {
+function TaskCard({ task, isDragging }) {
   return (
-    <div className="task-card">
-      <h4>{task.name}</h4>
+    <div className={`task-card ${isDragging ? 'dragging' : ''}`}>
+      {task.name}
     </div>
   );
 }

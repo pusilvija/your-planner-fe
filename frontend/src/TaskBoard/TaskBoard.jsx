@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import TaskColumn from './TaskColumn/TaskColumn.jsx';
+import TaskCard from './TaskColumn/TaskCard/TaskCard.jsx'; 
 import './TaskBoard.css';
 
 import {
@@ -157,9 +158,7 @@ function TaskBoard() {
 
       <DragOverlay>
         {activeTask ? (
-          <div className="task-item dragging">
-            {activeTask.name}
-          </div>
+          <TaskCard task={activeTask} isDragging={true} />
         ) : null}
       </DragOverlay>
     </DndContext>
