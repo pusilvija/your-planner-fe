@@ -1,6 +1,5 @@
 import './App.css';
 
-// import Task from './Task/Task.jsx';
 import TaskBoard from './TaskBoard/TaskBoard.jsx'
 
 
