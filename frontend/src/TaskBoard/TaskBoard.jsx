@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import TaskColumn from './TaskColumn/TaskColumn.jsx';
 import TaskCard from './TaskColumn/TaskCard/TaskCard.jsx';
 import './TaskBoard.css';
+import { Link } from 'react-router-dom'; // Importing Link for navigation
 
 import {
   DndContext,
@@ -165,7 +166,18 @@ function TaskBoard() {
             items={tasks[status].map((task) => task.id.toString())}
             strategy={verticalListSortingStrategy}
           >
-            <TaskColumn status={status} tasks={tasks[status]} />
+            <div className="task-column">
+              <div className="column-header">
+                <h2>{status}</h2>
+                <button className="add-task-btn">+</button>
+              </div>
+
+              {tasks[status].map((task) => (
+                <Link key={task.id} to={`/tasks/${task.id}`} className="task-card-link">
+                  <TaskCard task={task} />
+                </Link>
+              ))}
+            </div>
           </SortableContext>
         ))}
       </div>
