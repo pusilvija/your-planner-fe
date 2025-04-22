@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import TaskColumn from './TaskColumn/TaskColumn.jsx';
-import TaskCard from './TaskColumn/TaskCard/TaskCard.jsx'; 
+import TaskCard from './TaskColumn/TaskCard/TaskCard.jsx';
 import './TaskBoard.css';
 
 import {
@@ -15,8 +15,8 @@ import {
 import {
   SortableContext,
   verticalListSortingStrategy,
+  sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable';
-import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 
 const statuses = ['to do', 'in progress', 'done'];
 
@@ -27,7 +27,7 @@ function TaskBoard() {
     'done': [],
   });
 
-  const [activeTask, setActiveTask] = useState(null); // Track the dragged task
+  const [activeTask, setActiveTask] = useState(null);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -58,58 +58,71 @@ function TaskBoard() {
     }
   };
 
+  const handleDragOver = (event) => {
+    const { active, over } = event;
+    if (!over) return;
+
+    const activeId = active.id;
+    const overId = over.id;
+
+    if (activeId === overId) return;
+
+    let activeContainer, overContainer;
+    statuses.forEach(status => {
+      if (tasks[status].some(task => task.id.toString() === activeId)) {
+        activeContainer = status;
+      }
+      if (tasks[status].some(task => task.id.toString() === overId)) {
+        overContainer = status;
+      }
+    });
+
+    if (!activeContainer || !overContainer) return;
+
+    if (activeContainer !== overContainer) {
+      // Moving across columns
+      const activeTask = tasks[activeContainer].find(task => task.id.toString() === activeId);
+
+      setTasks(prev => {
+        const activeTasks = prev[activeContainer].filter(task => task.id.toString() !== activeId);
+        const overTasks = [...prev[overContainer]];
+
+        const overIndex = overTasks.findIndex(task => task.id.toString() === overId);
+        overTasks.splice(overIndex, 0, activeTask);
+
+        return {
+          ...prev,
+          [activeContainer]: activeTasks,
+          [overContainer]: overTasks,
+        };
+      });
+    } else {
+      // Reordering inside the same column
+      setTasks(prev => {
+        const columnTasks = [...prev[activeContainer]];
+        const oldIndex = columnTasks.findIndex(task => task.id.toString() === activeId);
+        const newIndex = columnTasks.findIndex(task => task.id.toString() === overId);
+
+        if (oldIndex !== newIndex) {
+          const movedTask = columnTasks.splice(oldIndex, 1)[0];
+          columnTasks.splice(newIndex, 0, movedTask);
+        }
+
+        return {
+          ...prev,
+          [activeContainer]: columnTasks,
+        };
+      });
+    }
+  };
+
   const handleDragEnd = (event) => {
     const { active, over } = event;
-    setActiveTask(null); // Clear overlay after drag
+    setActiveTask(null);
 
     if (!over || active.id === over.id) return;
 
-    let sourceStatus, destinationStatus;
-    let draggedTask = null;
-
-    for (const status of statuses) {
-      const taskIndex = tasks[status].findIndex((task) => task.id.toString() === active.id);
-      if (taskIndex !== -1) {
-        sourceStatus = status;
-        draggedTask = tasks[status][taskIndex];
-        break;
-      }
-    }
-
-    for (const status of statuses) {
-      const targetIndex = tasks[status].findIndex((task) => task.id.toString() === over.id);
-      if (targetIndex !== -1) {
-        destinationStatus = status;
-
-        const updatedSource = tasks[sourceStatus].filter((task) => task.id.toString() !== active.id);
-        const updatedDest = tasks[destinationStatus].filter((task) => task.id !== draggedTask.id);
-        updatedDest.splice(targetIndex, 0, { ...draggedTask, status: destinationStatus });
-
-        const updatedTasks = {
-          ...tasks,
-          [sourceStatus]: updatedSource,
-          [destinationStatus]: updatedDest,
-        };
-
-        setTasks(updatedTasks);
-        syncWithBackend(updatedTasks);
-        return;
-      }
-    }
-
-    if (draggedTask && sourceStatus !== over.id) {
-      const updatedSource = tasks[sourceStatus].filter((task) => task.id.toString() !== active.id);
-      const updatedDest = [...tasks[over.id], { ...draggedTask, status: over.id }];
-
-      const updatedTasks = {
-        ...tasks,
-        [sourceStatus]: updatedSource,
-        [over.id]: updatedDest,
-      };
-
-      setTasks(updatedTasks);
-      syncWithBackend(updatedTasks);
-    }
+    syncWithBackend(tasks);
   };
 
   const syncWithBackend = (taskState) => {
@@ -122,7 +135,7 @@ function TaskBoard() {
       }));
     }
 
-    fetch('http://localhost:8000/api/taskboard/', {
+    fetch('/api/taskboard/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
@@ -141,6 +154,7 @@ function TaskBoard() {
       sensors={sensors}
       collisionDetection={closestCenter}
       onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
       <div className="task-board">
