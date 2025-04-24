@@ -1,13 +1,9 @@
-import TaskCard from './TaskCard/TaskCard.jsx';
-import './TaskColumn.css';
-import { SortableItem } from './SortableItem.jsx';
 import { useDroppable } from '@dnd-kit/core';
-import { Link } from 'react-router-dom';
+import './TaskColumn.css';
+import SortableTaskCard from './TaskCard/SortableTaskCard.jsx';
 
-function TaskColumn({ status, tasks }) {
-  const { setNodeRef } = useDroppable({
-    id: status, // Make the entire column droppable
-  });
+function TaskColumn({ status, tasks, draggingTaskId, handleClick }) {
+  const { setNodeRef } = useDroppable({ id: status });
 
   return (
     <div ref={setNodeRef} className="task-column">
@@ -16,12 +12,13 @@ function TaskColumn({ status, tasks }) {
         <button className="add-task-btn">+</button>
       </div>
 
-      {tasks.map(task => (
-        <SortableItem key={task.id} id={task.id.toString()}>
-          <Link to={`/tasks/${task.id}`} className="task-card-link">
-            <TaskCard task={task} />
-          </Link>
-        </SortableItem>
+      {tasks.map((task) => (
+        <SortableTaskCard
+          key={task.id}
+          task={task}
+          onClick={() => handleClick(task.id)}
+          isDragging={task.id.toString() === draggingTaskId}
+          />
       ))}
     </div>
   );

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import TaskColumn from './TaskColumn/TaskColumn.jsx';
 import TaskCard from './TaskColumn/TaskCard/TaskCard.jsx';
 import './TaskBoard.css';
-import { Link } from 'react-router-dom'; // Importing Link for navigation
+import { useNavigate } from 'react-router-dom';
 
 import {
   DndContext,
@@ -29,16 +29,23 @@ function TaskBoard() {
   });
 
   const [activeTask, setActiveTask] = useState(null);
+  const [draggingTaskId, setDraggingTaskId] = useState(null);
+
+  const navigate = useNavigate();
 
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 10,
+      },
+    }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/taskboard/')
+    fetch('/api/taskboard/')
       .then((res) => res.json())
       .then((data) => {
         setTasks(data);
@@ -47,16 +54,24 @@ function TaskBoard() {
   }, []);
 
   const handleDragStart = (event) => {
-    const { active } = event;
-    const taskId = active.id;
 
+    const { active } = event;
+    const activeId = active.id.toString();
+
+    let activeStatus = null;
     for (const status of statuses) {
-      const task = tasks[status].find((t) => t.id.toString() === taskId);
-      if (task) {
-        setActiveTask(task);
+      if (tasks[status].some((task) => task.id.toString() === activeId)) {
+        activeStatus = status;
         break;
       }
     }
+
+    if (activeStatus) {
+      const task = tasks[activeStatus].find((task) => task.id.toString() === activeId);
+      setActiveTask(task);
+    }
+
+    setDraggingTaskId(activeId);
   };
 
   const handleDragOver = (event) => {
@@ -65,15 +80,14 @@ function TaskBoard() {
 
     const activeId = active.id;
     const overId = over.id;
-
     if (activeId === overId) return;
 
     let activeContainer, overContainer;
-    statuses.forEach(status => {
-      if (tasks[status].some(task => task.id.toString() === activeId)) {
+    statuses.forEach((status) => {
+      if (tasks[status].some((task) => task.id.toString() === activeId)) {
         activeContainer = status;
       }
-      if (tasks[status].some(task => task.id.toString() === overId)) {
+      if (tasks[status].some((task) => task.id.toString() === overId)) {
         overContainer = status;
       }
     });
@@ -81,14 +95,19 @@ function TaskBoard() {
     if (!activeContainer || !overContainer) return;
 
     if (activeContainer !== overContainer) {
-      // Moving across columns
-      const activeTask = tasks[activeContainer].find(task => task.id.toString() === activeId);
+      const activeTask = tasks[activeContainer].find(
+        (task) => task.id.toString() === activeId
+      );
 
-      setTasks(prev => {
-        const activeTasks = prev[activeContainer].filter(task => task.id.toString() !== activeId);
+      setTasks((prev) => {
+        const activeTasks = prev[activeContainer].filter(
+          (task) => task.id.toString() !== activeId
+        );
         const overTasks = [...prev[overContainer]];
 
-        const overIndex = overTasks.findIndex(task => task.id.toString() === overId);
+        const overIndex = overTasks.findIndex(
+          (task) => task.id.toString() === overId
+        );
         overTasks.splice(overIndex, 0, activeTask);
 
         return {
@@ -98,11 +117,14 @@ function TaskBoard() {
         };
       });
     } else {
-      // Reordering inside the same column
-      setTasks(prev => {
+      setTasks((prev) => {
         const columnTasks = [...prev[activeContainer]];
-        const oldIndex = columnTasks.findIndex(task => task.id.toString() === activeId);
-        const newIndex = columnTasks.findIndex(task => task.id.toString() === overId);
+        const oldIndex = columnTasks.findIndex(
+          (task) => task.id.toString() === activeId
+        );
+        const newIndex = columnTasks.findIndex(
+          (task) => task.id.toString() === overId
+        );
 
         if (oldIndex !== newIndex) {
           const movedTask = columnTasks.splice(oldIndex, 1)[0];
@@ -120,6 +142,7 @@ function TaskBoard() {
   const handleDragEnd = (event) => {
     const { active, over } = event;
     setActiveTask(null);
+    setDraggingTaskId(null);
 
     if (!over || active.id === over.id) return;
 
@@ -128,7 +151,6 @@ function TaskBoard() {
 
   const syncWithBackend = (taskState) => {
     const payload = {};
-
     for (const status of statuses) {
       payload[status] = taskState[status].map((task, index) => ({
         id: task.id,
@@ -150,6 +172,10 @@ function TaskBoard() {
       });
   };
 
+  const handleClick = (taskId) => {
+    navigate(`/tasks/${taskId}`);
+  };
+
   return (
     <DndContext
       sensors={sensors}
@@ -166,18 +192,13 @@ function TaskBoard() {
             items={tasks[status].map((task) => task.id.toString())}
             strategy={verticalListSortingStrategy}
           >
-            <div className="task-column">
-              <div className="column-header">
-                <h2>{status}</h2>
-                <button className="add-task-btn">+</button>
-              </div>
-
-              {tasks[status].map((task) => (
-                <Link key={task.id} to={`/tasks/${task.id}`} className="task-card-link">
-                  <TaskCard task={task} />
-                </Link>
-              ))}
-            </div>
+            <TaskColumn
+              key={status}
+              status={status}
+              tasks={tasks[status]}
+              draggingTaskId={draggingTaskId}
+              handleClick={handleClick}
+            />
           </SortableContext>
         ))}
       </div>
