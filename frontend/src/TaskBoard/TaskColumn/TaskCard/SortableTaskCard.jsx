@@ -1,9 +1,10 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+
 import TaskCard from './TaskCard';
 
 
-function SortableTaskCard({ task, onClick, draggingTaskId }) {
+function SortableTaskCard({ task, onClick }) {
   const {
     attributes,
     listeners,
@@ -20,16 +21,14 @@ function SortableTaskCard({ task, onClick, draggingTaskId }) {
   };
 
   return (
-    <div style={style}>
-      <div onClick={onClick}>
-        <div
-          ref={setNodeRef}
-          {...attributes}
-          {...listeners}
-        >
-          <TaskCard task={task} isDragging={task.id.toString() === draggingTaskId} />
-        </div>
-      </div>
+    <div
+      ref={setNodeRef}
+      {...attributes}
+      {...listeners}
+      style={style}
+      onClick={onClick}
+    >
+      <TaskCard task={task} isDragging={isDragging} />
     </div>
   );
 }

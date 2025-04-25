@@ -1,6 +1,8 @@
 import { useDroppable } from '@dnd-kit/core';
+
 import './TaskColumn.css';
 import SortableTaskCard from './TaskCard/SortableTaskCard.jsx';
+
 
 function TaskColumn({ status, tasks, draggingTaskId, handleClick }) {
   const { setNodeRef } = useDroppable({ id: status });
@@ -17,8 +19,7 @@ function TaskColumn({ status, tasks, draggingTaskId, handleClick }) {
           key={task.id}
           task={task}
           onClick={() => handleClick(task.id)}
-          isDragging={task.id.toString() === draggingTaskId}
-          />
+        />
       ))}
     </div>
   );
