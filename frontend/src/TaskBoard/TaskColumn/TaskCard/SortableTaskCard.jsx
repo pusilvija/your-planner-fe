@@ -4,7 +4,7 @@ import { CSS } from '@dnd-kit/utilities';
 import TaskCard from './TaskCard';
 
 
-function SortableTaskCard({ task, onClick }) {
+function SortableTaskCard({ task, onClick, handleDelete }) {
   const {
     attributes,
     listeners,
@@ -28,7 +28,7 @@ function SortableTaskCard({ task, onClick }) {
       style={style}
       onClick={onClick}
     >
-      <TaskCard task={task} isDragging={isDragging} />
+      <TaskCard task={task} isDragging={isDragging} handleDelete={handleDelete}/>
     </div>
   );
 }

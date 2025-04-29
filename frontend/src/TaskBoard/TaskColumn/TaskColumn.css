@@ -5,7 +5,7 @@
   width: 300px;
   min-height: 500px;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   transition: border-color 0.2s;
@@ -22,12 +22,23 @@
 }
 
 .add-task-btn {
-  background-color: hwb(203 44% 41%);
+  background-color: #6b8e23; /* Medium olive green */
   color: white;
   border: none;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 40px; /* Slightly larger button */
+  height: 40px;
   font-size: 20px;
   cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.add-task-btn:hover {
+  background-color: #556b2f; /* Darker olive green on hover */
+  transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+.add-task-btn:active {
+  background-color: #3e4f1c; /* Darkest olive green on active */
+  transform: scale(0.95); /* Slightly shrink on active */
 }

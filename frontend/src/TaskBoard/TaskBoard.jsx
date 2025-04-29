@@ -80,6 +80,7 @@ function TaskBoard() {
               tasks={tasks[status]}
               draggingTaskId={draggingTaskId}
               handleClick={handleClick}
+              setTasks={setTasks}
             />
           </SortableContext>
         ))}

@@ -4,8 +4,30 @@ import './TaskColumn.css';
 import SortableTaskCard from './TaskCard/SortableTaskCard.jsx';
 
 
-function TaskColumn({ status, tasks, draggingTaskId, handleClick }) {
+function TaskColumn({ status, tasks, draggingTaskId, handleClick, setTasks}) {
   const { setNodeRef } = useDroppable({ id: status });
+  const handleDelete = (taskId) => {
+    // Remove the task from the frontend state
+    setTasks((prevTasks) => {
+      const updatedTasks = { ...prevTasks };
+      updatedTasks[status] = updatedTasks[status].filter((task) => task.id !== taskId);
+      return updatedTasks;
+    });
+  
+    // Send a DELETE request to the backend
+    fetch(`/api/tasks/${taskId}/delete/`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to delete task');
+        }
+        console.log(`Task ${taskId} deleted successfully.`);
+      })
+      .catch((error) => {
+        console.error('Error deleting task:', error);
+      });
+  };
 
   return (
     <div ref={setNodeRef} className="task-column">
@@ -19,6 +41,7 @@ function TaskColumn({ status, tasks, draggingTaskId, handleClick }) {
           key={task.id}
           task={task}
           onClick={() => handleClick(task.id)}
+          handleDelete={handleDelete}
         />
       ))}
     </div>
