@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import { debounce } from 'lodash';
 
 const statuses = ['to do', 'in progress', 'done'];
 
@@ -27,62 +28,65 @@ export default function useTaskDragHandlers(tasks, setTasks, setActiveTask, setD
     setDraggingTaskId(activeId);
   };
 
-  const handleDragOver = ({ active, over }) => {
-    if (!over) return; // If there's no target, do nothing.
+  const handleDragOver = useCallback(
+    debounce(({ active, over }) => {
+      if (!over) return; // If there's no target, do nothing.
 
-    const activeId = active.id.toString();
-    const overId = over.id.toString();
+      const activeId = active.id.toString();
+      const overId = over.id.toString();
 
-    // If the active item is hovering over itself, do nothing.
-    if (activeId === overId) {
-      console.log('Active item is hovering over itself, skipping sync.');
-      return;
-    }
+      // If the active item is hovering over itself, do nothing.
+      if (activeId === overId) {
+        console.log('Active item is hovering over itself, skipping sync.');
+        return;
+      }
 
-    const activeStatus = findTaskStatus(activeId);
-    const overStatus = findTaskStatus(overId);
+      const activeStatus = findTaskStatus(activeId);
+      const overStatus = findTaskStatus(overId);
 
-    if (!activeStatus || !overStatus) return;
+      if (!activeStatus || !overStatus) return;
 
-    // If the task is being moved between columns.
-    if (activeStatus !== overStatus) {
-      const movedTask = tasks[activeStatus].find((task) => task.id.toString() === activeId);
+      // If the task is being moved between columns.
+      if (activeStatus !== overStatus) {
+        const movedTask = tasks[activeStatus].find((task) => task.id.toString() === activeId);
 
-      setTasks((prev) => {
-        const newActive = prev[activeStatus].filter((task) => task.id.toString() !== activeId);
-        const newOver = [...prev[overStatus]];
-        const overIndex = newOver.findIndex((task) => task.id.toString() === overId);
-        newOver.splice(overIndex, 0, movedTask);
-
-        return {
-          ...prev,
-          [activeStatus]: newActive,
-          [overStatus]: newOver,
-        };
-      });
-    } else {
-      // If the task is just reordered within the same column.
-      setTasks((prev) => {
-        const updated = [...prev[activeStatus]];
-        const from = updated.findIndex((t) => t.id.toString() === activeId);
-        const to = updated.findIndex((t) => t.id.toString() === overId);
-
-        // Move the task within the same status.
-        if (from !== to) {
-          const reordered = [...updated];
-          const [moved] = reordered.splice(from, 1);
-          reordered.splice(to, 0, moved);
+        setTasks((prev) => {
+          const newActive = prev[activeStatus].filter((task) => task.id.toString() !== activeId);
+          const newOver = [...prev[overStatus]];
+          const overIndex = newOver.findIndex((task) => task.id.toString() === overId);
+          newOver.splice(overIndex, 0, movedTask);
 
           return {
             ...prev,
-            [activeStatus]: reordered,
+            [activeStatus]: newActive,
+            [overStatus]: newOver,
           };
-        }
+        });
+      } else {
+        // If the task is just reordered within the same column.
+        setTasks((prev) => {
+          const updated = [...prev[activeStatus]];
+          const from = updated.findIndex((t) => t.id.toString() === activeId);
+          const to = updated.findIndex((t) => t.id.toString() === overId);
 
-        return prev;
-      });
-    }
-  };
+          // Move the task within the same status.
+          if (from !== to) {
+            const reordered = [...updated];
+            const [moved] = reordered.splice(from, 1);
+            reordered.splice(to, 0, moved);
+
+            return {
+              ...prev,
+              [activeStatus]: reordered,
+            };
+          }
+
+          return prev;
+        });
+      }
+    }, 100),
+    [tasks, setTasks, findTaskStatus]
+  );
 
   const handleDragEnd = ({ active, over }) => {
     setActiveTask(null);
