@@ -7,7 +7,6 @@ import TaskDetails from './TaskDetails/TaskDetails.jsx';
 function App() {
   return (
     <>
-    <h1>Planner</h1>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<TaskBoard />} />

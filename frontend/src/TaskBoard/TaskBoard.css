@@ -1,6 +1,11 @@
 .task-board {
   display: flex;
+  align-items: center;
+  flex-direction: vertical;
   gap: 20px;
   overflow-x: auto;
 }
 
+.task-board-title {
+  text-align: center;
+}
