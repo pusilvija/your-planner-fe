@@ -4,7 +4,7 @@ import { CSS } from '@dnd-kit/utilities';
 import TaskCard from './TaskCard';
 
 
-function SortableTaskCard({ task, onClick, handleDelete }) {
+function SortableTaskCard({ task, onClick, handleDelete, handleUpdate }) {
   const {
     attributes,
     listeners,
@@ -19,16 +19,19 @@ function SortableTaskCard({ task, onClick, handleDelete }) {
     transition,
     opacity: isDragging ? 0.5 : 1,
   };
-
   return (
     <div
       ref={setNodeRef}
-      {...attributes}
-      {...listeners}
+      {...(task.isEditing ? {} : attributes)} // Disable drag attributes if editing
+      {...(task.isEditing ? {} : listeners)} // Disable drag listeners if editing
       style={style}
       onClick={onClick}
     >
-      <TaskCard task={task} isDragging={isDragging} handleDelete={handleDelete}/>
+      <TaskCard
+        task={task}
+        isDragging={isDragging}
+        handleDelete={handleDelete}
+        handleUpdate={handleUpdate}/>
     </div>
   );
 }

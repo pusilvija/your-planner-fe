@@ -35,7 +35,6 @@ export default function useTaskDragHandlers(tasks, setTasks, setActiveTask, setD
       const activeId = active.id.toString();
       const overId = over.id.toString();
 
-      // If the active item is hovering over itself, do nothing.
       if (activeId === overId) {
         console.log('Active item is hovering over itself, skipping sync.');
         return;
@@ -96,8 +95,6 @@ export default function useTaskDragHandlers(tasks, setTasks, setActiveTask, setD
     const overId = over?.id.toString();
     const overStatus = over ? findTaskStatus(overId) : null;
 
-    console.log('Drag End:', { activeId, overId, originalPosition });
-
     // If there's no valid drop target, do nothing.
     if (!over && !originalPosition) {
       console.log('No valid drop target, skipping sync.');
@@ -115,8 +112,6 @@ export default function useTaskDragHandlers(tasks, setTasks, setActiveTask, setD
       console.log('Task returned to its original position, skipping sync.');
       return;
     }
-
-    console.log('Task moved:', { activeId, activeStatus, overId, overStatus });
 
     try {
       syncWithBackend(tasks);

@@ -4,7 +4,7 @@ import './TaskColumn.css';
 import SortableTaskCard from './TaskCard/SortableTaskCard.jsx';
 
 
-function TaskColumn({ status, tasks, draggingTaskId, handleClick, setTasks}) {
+function TaskColumn({ status, tasks, draggingTaskId, handleClick, setTasks, updateTaskName}) {
   const { setNodeRef } = useDroppable({ id: status });
   const handleDelete = (taskId) => {
     // Remove the task from the frontend state
@@ -28,7 +28,6 @@ function TaskColumn({ status, tasks, draggingTaskId, handleClick, setTasks}) {
         console.error('Error deleting task:', error);
       });
   };
-
   return (
     <div ref={setNodeRef} className="task-column">
       <div className="column-header">
@@ -42,6 +41,7 @@ function TaskColumn({ status, tasks, draggingTaskId, handleClick, setTasks}) {
           task={task}
           onClick={() => handleClick(task.id)}
           handleDelete={handleDelete}
+          handleUpdate={(taskId, newName) => updateTaskName(taskId, newName)}
         />
       ))}
     </div>
