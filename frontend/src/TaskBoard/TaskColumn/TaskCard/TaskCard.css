@@ -68,7 +68,7 @@
 }
 
 .task-name-input {
-  background-color: #e6e6d3;;
+  background-color: inherit; 
   font-size: 1.2em;
   font-weight: bold;
   color: #556b2f; /* Olive green */
@@ -77,4 +77,8 @@
   padding: 5px;
   width: 100%;
   box-sizing: border-box;
+}
+
+.task-name-input:hover {
+  background-color: inherit;
 }
