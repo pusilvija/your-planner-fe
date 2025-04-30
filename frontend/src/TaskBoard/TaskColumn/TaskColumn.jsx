@@ -1,11 +1,18 @@
 import { useDroppable } from '@dnd-kit/core';
+import { useNavigate } from 'react-router-dom';
 
 import './TaskColumn.css';
 import SortableTaskCard from './TaskCard/SortableTaskCard.jsx';
 
 
-function TaskColumn({ status, tasks, draggingTaskId, handleClick, setTasks, updateTaskName}) {
+function TaskColumn({ status, tasks, handleClick, setTasks, updateTaskName}) {
   const { setNodeRef } = useDroppable({ id: status });
+  const navigate = useNavigate();
+
+  const handleAddTask = () => {
+    navigate(`/tasks/new?status=${status}`, )
+  }
+
   const handleDelete = (taskId) => {
     // Remove the task from the frontend state
     setTasks((prevTasks) => {
@@ -32,7 +39,7 @@ function TaskColumn({ status, tasks, draggingTaskId, handleClick, setTasks, upda
     <div ref={setNodeRef} className="task-column">
       <div className="column-header">
         <h2>{status}</h2>
-        <button className="add-task-btn">+</button>
+        <button className="add-task-btn" onClick={handleAddTask}>+</button>
       </div>
 
       {tasks.map((task) => (

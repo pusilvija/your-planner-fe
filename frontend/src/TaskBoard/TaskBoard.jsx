@@ -120,7 +120,6 @@ function TaskBoard() {
             <TaskColumn
               status={status}
               tasks={tasks[status]}
-              draggingTaskId={draggingTaskId}
               handleClick={handleClick}
               setTasks={setTasks}
               updateTaskName={updateTaskName}

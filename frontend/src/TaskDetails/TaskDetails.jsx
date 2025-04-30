@@ -1,23 +1,33 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-
 import './TaskDetails.css';
-
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
 function TaskDetails() {
   const { taskId } = useParams(); // Get taskId from URL
+  const navigate = useNavigate();
+  const location = useLocation(); // Use useLocation hook to get the current location
+  const queryParams = new URLSearchParams(location.search);
+  const initialStatus = queryParams.get('status') || 'to do';
+
   const [task, setTask] = useState(null);
-  const [taskData, setTaskData] = useState({});
+  const [taskData, setTaskData] = useState({
+    name: '',
+    description: '',
+    status: initialStatus,
+    category: '',
+  });
 
   useEffect(() => {
-    // Fetch task details when component loads
-    fetch(`/api/tasks/${taskId}/`)
-      .then((response) => response.json())
-      .then((data) => {
-        setTask(data);
-        setTaskData(data); // Initialize task data for editing
-      })
-      .catch(console.error);
+    if (taskId !== 'new') {
+      // Fetch task details when editing an existing task
+      fetch(`/api/tasks/${taskId}/`)
+        .then((response) => response.json())
+        .then((data) => {
+          setTask(data);
+          setTaskData(data);
+        })
+        .catch(console.error);
+    }
   }, [taskId]);
 
   const handleChange = (e) => {
@@ -29,28 +39,56 @@ function TaskDetails() {
   };
 
   const handleSave = () => {
-    // Send PUT request to update task details
-    fetch(`http://localhost:8000/api/tasks/${taskId}/`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(taskData),
-    })
-      .then((response) => response.json())
-      .then((updatedTask) => {
-        setTask(updatedTask);
+    if (taskId === 'new') {
+      // Create a new task
+      fetch('/api/tasks/add-new-task/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(taskData),
       })
-      .catch(console.error);
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Failed to create task');
+          }
+          return response.json();
+        })
+        .then((newTask) => {
+          console.log('Task created successfully:', newTask);
+          navigate('/'); // Navigate back to the task board
+        })
+        .catch((error) => {
+          console.error('Error creating task:', error);
+        });
+    } else {
+      // Update an existing task
+      fetch(`/api/tasks/${taskId}/`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(taskData),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Failed to update task');
+          }
+          return response.json();
+        })
+        .then((updatedTask) => {
+          console.log('Task updated successfully:', updatedTask);
+          navigate('/'); // Navigate back to the task board
+        })
+        .catch((error) => {
+          console.error('Error updating task:', error);
+        });
+    }
   };
-
-  if (!task) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div>
-      <h1>Task Details</h1>
+      <h1>{taskId === 'new' ? 'Create Task' : 'Edit Task'}</h1>
       <table>
         <tbody>
           <tr>
