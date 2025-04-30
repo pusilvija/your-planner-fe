@@ -1,0 +1,12 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('/public/images/bg.jpg'); /* Path relative to the public folder */
+    background-size: cover; /* Ensures the image covers the entire screen */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    height: 100vh; /* Ensures the background covers the full viewport height */
+    width: 100vw; /* Ensures the background covers the full viewport width */
+    overflow: hidden; /* Prevents scrolling if the image is larger than the viewport */
+    font-family: Arial, sans-serif; /* Optional: Set a global font */
+  }
