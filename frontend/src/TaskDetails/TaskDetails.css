@@ -18,19 +18,15 @@ table {
   
   .taskdetails-buttons {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #6b8e23;
     color: white;
     border: none;
     cursor: pointer;
     margin-right: 10px;
     margin-top: 10px;
   }
-
-  #back-button {
-    background-color: #6c757d;
-  }
   
   button:hover {
-    background-color: #0056b3;
+    background-color: #556b2f; 
   }
   
