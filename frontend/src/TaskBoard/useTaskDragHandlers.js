@@ -6,13 +6,26 @@ const statuses = ['to do', 'in progress', 'done'];
 export default function useTaskDragHandlers(tasks, setTasks, setActiveTask, setDraggingTaskId, syncWithBackend) {
   const findTaskStatus = (id) => {
     return statuses.find((status) =>
-      tasks[status].some((task) => task.id.toString() === id)
+      Array.isArray(tasks[status]) && tasks[status].some((task) => task.id.toString() === id)
     );
   };
 
   const [originalPosition, setOriginalPosition] = useState(null);
 
   const handleDragStart = ({ active }) => {
+    setTasks((prev) => {
+      const updatedTasks = { ...prev };
+  
+      // Ensure all statuses have an array, even if empty
+      statuses.forEach((status) => {
+        if (!Array.isArray(updatedTasks[status])) {
+          updatedTasks[status] = [];
+        }
+      });
+  
+      return updatedTasks;
+    });
+
     const activeId = active.id.toString();
     const status = findTaskStatus(activeId);
 
@@ -30,8 +43,7 @@ export default function useTaskDragHandlers(tasks, setTasks, setActiveTask, setD
 
   const handleDragOver = useCallback(
     debounce(({ active, over }) => {
-      if (!over) return; // If there's no target, do nothing.
-
+      if (!over) return;
       const activeId = active.id.toString();
       const overId = over.id.toString();
 
@@ -41,9 +53,16 @@ export default function useTaskDragHandlers(tasks, setTasks, setActiveTask, setD
       }
 
       const activeStatus = findTaskStatus(activeId);
-      const overStatus = findTaskStatus(overId);
+      let overStatus;
+      
+      if (statuses.includes(overId)) {
+        overStatus = overId;
+      } else {
+        overStatus = findTaskStatus(overId);
+      }
 
       if (!activeStatus || !overStatus) return;
+
 
       // If the task is being moved between columns.
       if (activeStatus !== overStatus) {
@@ -61,7 +80,8 @@ export default function useTaskDragHandlers(tasks, setTasks, setActiveTask, setD
             [overStatus]: newOver,
           };
         });
-      } else {
+      }
+      else {
         // If the task is just reordered within the same column.
         setTasks((prev) => {
           const updated = [...prev[activeStatus]];
@@ -93,7 +113,7 @@ export default function useTaskDragHandlers(tasks, setTasks, setActiveTask, setD
 
     const activeId = active.id.toString();
     const overId = over?.id.toString();
-    const overStatus = over ? findTaskStatus(overId) : null;
+    // const overStatus = over ? findTaskStatus(overId) : null;
 
     // If there's no valid drop target, do nothing.
     if (!over && !originalPosition) {

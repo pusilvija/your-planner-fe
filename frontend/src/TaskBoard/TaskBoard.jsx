@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   DndContext,
-  closestCenter,
+  rectIntersection,
   KeyboardSensor,
   PointerSensor,
   useSensor,
@@ -102,7 +102,7 @@ function TaskBoard() {
   return (
     <DndContext
       sensors={sensors}
-      collisionDetection={closestCenter}
+      collisionDetection={rectIntersection}
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
@@ -114,12 +114,12 @@ function TaskBoard() {
           <SortableContext
             key={status}
             id={status}
-            items={tasks[status].map((task) => task.id.toString())}
+            items={(tasks[status] || []).map((task) => task.id.toString())}
             strategy={verticalListSortingStrategy}
           >
             <TaskColumn
               status={status}
-              tasks={tasks[status]}
+              tasks={tasks[status] || []}
               handleClick={handleClick}
               setTasks={setTasks}
               updateTaskName={updateTaskName}
