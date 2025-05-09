@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Register.css'; // Import CSS for styling
+import axiosInstance from './axiosConfig.js';
+
 
 const Register = () => {
     const [username, setUsername] = useState('');
@@ -16,7 +18,7 @@ const Register = () => {
         setError(''); // Clear any previous errors
         setSuccess(false); // Reset success state
 
-        axios.post('/api/users/register/', {
+        axiosInstance.post('/users/register/', {
             username,
             email,
             password,
@@ -25,7 +27,7 @@ const Register = () => {
             console.log('Registration Successful', response.data);
             setSuccess(true); // Show success message
             setTimeout(() => {
-                navigate('/login'); // Redirect to login page after 2 seconds
+                navigate('/taskboard'); // Redirect to login page after 2 seconds
             }, 2000);
         })
         .catch(error => {
@@ -39,7 +41,7 @@ const Register = () => {
             <form className="register-form" onSubmit={handleSubmit}>
                 <h2 className="register-title">Register</h2>
                 {error && <p className="register-error">{error}</p>}
-                {success && <p className="register-success">Registration successful! Redirecting to login...</p>}
+                {success && <p className="register-success">Registration successful! Redirecting to taskboard...</p>}
                 <input
                     type="text"
                     placeholder="Username"

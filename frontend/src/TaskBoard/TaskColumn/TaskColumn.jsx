@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom';
 
 import './TaskColumn.css';
 import SortableTaskCard from './TaskCard/SortableTaskCard.jsx';
+import axiosInstance from '../../axiosConfig'; // Import axiosInstance
 
-
-function TaskColumn({ status, tasks, handleClick, setTasks, updateTaskName}) {
+function TaskColumn({ status, tasks, handleClick, setTasks, updateTaskName }) {
   const { setNodeRef } = useDroppable({ id: status });
   const navigate = useNavigate();
 
   const handleAddTask = () => {
-    navigate(`/tasks/new?status=${status}`, )
-  }
+    navigate(`/tasks/new?status=${status}`);
+  };
 
   const handleDelete = (taskId) => {
     // Remove the task from the frontend state
@@ -20,21 +20,18 @@ function TaskColumn({ status, tasks, handleClick, setTasks, updateTaskName}) {
       updatedTasks[status] = updatedTasks[status].filter((task) => task.id !== taskId);
       return updatedTasks;
     });
-  
-    // Send a DELETE request to the backend
-    fetch(`/api/tasks/${taskId}/delete/`, {
-      method: 'DELETE',
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Failed to delete task');
-        }
+
+    // Send a DELETE request to the backend using axiosInstance
+    axiosInstance
+      .delete(`/tasks/${taskId}/delete/`)
+      .then(() => {
         console.log(`Task ${taskId} deleted successfully.`);
       })
       .catch((error) => {
         console.error('Error deleting task:', error);
       });
   };
+
   return (
     <div ref={setNodeRef} className="task-column">
       <div className="column-header">

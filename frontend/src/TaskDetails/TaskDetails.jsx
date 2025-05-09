@@ -1,6 +1,7 @@
 import './TaskDetails.css';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import axiosInstance from '../axiosConfig'; // Import axiosInstance
 
 function TaskDetails() {
   const { taskId } = useParams(); // Get taskId from URL
@@ -20,13 +21,14 @@ function TaskDetails() {
   useEffect(() => {
     if (taskId !== 'new') {
       // Fetch task details when editing an existing task
-      fetch(`/api/tasks/${taskId}/`)
-        .then((response) => response.json())
-        .then((data) => {
-          setTask(data);
-          setTaskData(data);
+      axiosInstance.get(`/tasks/${taskId}/`)
+        .then((response) => {
+          setTask(response.data);
+          setTaskData(response.data);
         })
-        .catch(console.error);
+        .catch((error) => {
+          console.error('Error fetching task details:', error);
+        });
     }
   }, [taskId]);
 
@@ -41,44 +43,20 @@ function TaskDetails() {
   const handleSave = () => {
     if (taskId === 'new') {
       // Create a new task
-      fetch('/api/tasks/add-new-task/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(taskData),
-      })
+      axiosInstance.post('/tasks/add-new-task/', taskData)
         .then((response) => {
-          if (!response.ok) {
-            throw new Error('Failed to create task');
-          }
-          return response.json();
-        })
-        .then((newTask) => {
-          console.log('Task created successfully:', newTask);
-          navigate('/'); // Navigate back to the task board
+          console.log('Task created successfully:', response.data);
+          navigate('/taskboard'); // Navigate back to the task board
         })
         .catch((error) => {
           console.error('Error creating task:', error);
         });
     } else {
       // Update an existing task
-      fetch(`/api/tasks/${taskId}/`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(taskData),
-      })
+      axiosInstance.patch(`/tasks/${taskId}/`, taskData)
         .then((response) => {
-          if (!response.ok) {
-            throw new Error('Failed to update task');
-          }
-          return response.json();
-        })
-        .then((updatedTask) => {
-          console.log('Task updated successfully:', updatedTask);
-          navigate('/'); // Navigate back to the task board
+          console.log('Task updated successfully:', response.data);
+          navigate('/taskboard'); // Navigate back to the task board
         })
         .catch((error) => {
           console.error('Error updating task:', error);

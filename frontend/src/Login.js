@@ -12,7 +12,7 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setError('');
-        axiosInstance.post('/api/users/login/', {
+        axiosInstance.post('/users/login/', {
             username,
             password,
         })
