@@ -116,8 +116,7 @@ export default function useTaskDragHandlers(tasks, setTasks, setActiveTask, setD
     setDraggingTaskId(null);
 
     const activeId = active.id.toString();
-    const overId = over?.id.toString();
-    // const overStatus = over ? findTaskStatus(overId) : null;
+    // const overId = over?.id.toString();
 
     // If there's no valid drop target, do nothing.
     if (!over && !originalPosition) {

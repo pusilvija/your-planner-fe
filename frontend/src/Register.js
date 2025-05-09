@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './Register.css'; // Import CSS for styling
+import './Register.css';
 import axiosInstance from './axiosConfig.js';
 
 
@@ -11,7 +11,7 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
-    const navigate = useNavigate(); // Hook for navigation
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -25,9 +25,9 @@ const Register = () => {
         })
         .then(response => {
             console.log('Registration Successful', response.data);
-            setSuccess(true); // Show success message
+            setSuccess(true);
             setTimeout(() => {
-                navigate('/taskboard'); // Redirect to login page after 2 seconds
+                navigate('/taskboard');
             }, 2000);
         })
         .catch(error => {
@@ -41,7 +41,7 @@ const Register = () => {
             <form className="register-form" onSubmit={handleSubmit}>
                 <h2 className="register-title">Register</h2>
                 {error && <p className="register-error">{error}</p>}
-                {success && <p className="register-success">Registration successful! Redirecting to taskboard...</p>}
+                {success && <p className="register-success">Registration successful!</p>}
                 <input
                     type="text"
                     placeholder="Username"
