@@ -1,22 +1,29 @@
+body {
+    background-image: url('/public/images/bg.jpg'); /* Correct path */
+    background-size: cover; /* Ensure the image covers the entire screen */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+}
+
 .landing-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f9;
+    background-color: rgba(255, 255, 255, 0.5); 
     text-align: center;
 }
 
 .landing-title {
     font-size: 2rem;
-    color: #333333;
+    color: #ffffff; /* White text for contrast */
     margin-bottom: 1rem;
 }
 
 .landing-subtitle {
     font-size: 1.2rem;
-    color: #666666;
+    color: #f8f9f5; /* Light greenish text */
     margin-bottom: 2rem;
 }
 
@@ -27,7 +34,7 @@
 
 .landing-button {
     padding: 0.8rem 1.5rem;
-    background-color: #007bff;
+    background-color: #3e4f1c; /* Primary green color */
     color: #ffffff;
     text-decoration: none;
     border-radius: 4px;
@@ -36,5 +43,9 @@
 }
 
 .landing-button:hover {
-    background-color: #0056b3;
+    background-color: #2e3b14; /* Darker shade of primary green */
+}
+
+.landing-button:active {
+    background-color: #24300f; /* Even darker shade for active state */
 }

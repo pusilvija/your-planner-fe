@@ -5,28 +5,21 @@ import TaskBoard from './TaskBoard/TaskBoard.jsx';
 import TaskDetails from './TaskDetails/TaskDetails.jsx';
 import Login from './Login.js';
 import Register from './Register.js';
-import LandingPage from './LandingPage.js'; // Import the new LandingPage component
-
-// Protected Route Component
-const ProtectedRoute = ({ children }) => {
-  const token = localStorage.getItem('token'); // Check if the token exists
-  return token ? children : <Navigate to="/landing" replace />; // Redirect to the landing page
-};
+import LandingPage from './LandingPage.js';
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Landing Page Route */}
-        <Route path="/landing" element={<LandingPage />} />
-
-        {/* Login and Register Routes */}
+        {/* Public Routes */}
+        <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
         {/* Protected Routes */}
         <Route
-          path="/"
+          path="/taskboard"
           element={
             <ProtectedRoute>
               <TaskBoard />
@@ -42,8 +35,8 @@ function App() {
           }
         />
 
-        {/* Redirect to Landing Page by Default */}
-        <Route path="*" element={<Navigate to="/landing" replace />} />
+        {/* Redirect all unknown routes to the main page (LandingPage) */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,9 +1,16 @@
+body {
+    background-image: url('/public/images/bg.jpg');
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .register-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f9;
+    background-color: rgba(255, 255, 255, 0.5); 
 }
 
 .register-form {
@@ -19,7 +26,7 @@
 .register-title {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #333333;
+    color: #3e4f1c;
 }
 
 .register-error {
@@ -38,22 +45,25 @@
     width: 100%;
     padding: 0.8rem;
     margin-bottom: 1rem;
-    border: 1px solid #cccccc;
+    border: 1px solid #3e4f1c;
     border-radius: 4px;
     font-size: 1rem;
     box-sizing: border-box;
+    background-color: #f8f9f5;
+    color: #3e4f1c;
 }
 
 .register-input:focus {
-    border-color: #007bff;
+    border-color: #3e4f1c;
     outline: none;
-    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+    box-shadow: 0 0 4px rgba(62, 79, 28, 0.5); /* Greenish shadow */
+    background-color: #ffffff; /* Ensure the background remains white */
 }
 
 .register-button {
     width: 100%;
     padding: 0.8rem;
-    background-color: #007bff;
+    background-color: #3e4f1c; /* Primary green color */
     color: #ffffff;
     border: none;
     border-radius: 4px;
@@ -63,5 +73,25 @@
 }
 
 .register-button:hover {
-    background-color: #0056b3;
+    background-color: #2e3b14; /* Darker shade of primary green */
+}
+
+.register-button:active {
+    background-color: #24300f; /* Even darker shade for active state */
+}
+
+/* Remove autofill background color */
+.register-input:-webkit-autofill {
+    background-color: #f8f9f5 !important; /* Light greenish background */
+    -webkit-box-shadow: 0 0 0px 1000px #f8f9f5 inset !important; /* Remove the blueish shadow */
+    box-shadow: 0 0 0px 1000px #f8f9f5 inset !important; /* Remove the blueish shadow */
+    color: #3e4f1c !important; /* Primary green color for text */
+}
+
+.register-input:-webkit-autofill:focus {
+    background-color: #ffffff !important; /* Ensure the background remains white */
+    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important; /* Remove the blueish shadow */
+    box-shadow: 0 0 0px 1000px #ffffff inset !important; /* Remove the blueish shadow */
+    border-color: #3e4f1c !important; /* Primary green color for focus */
+    color: #3e4f1c !important; /* Primary green color for text */
 }

@@ -9,3 +9,28 @@
 .task-board-title {
   text-align: center;
 }
+
+/* Style for the logout button */
+.logout-button {
+  position: absolute; /* Position it relative to the container */
+  top: 1rem; /* Distance from the top */
+  right: 1rem; /* Distance from the right */
+  padding: 0.5rem 1rem; /* Add padding for a larger clickable area */
+  background-color: #3e4f1c; /* Primary green color */
+  color: #ffffff; /* White text for contrast */
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Slightly rounded corners */
+  font-size: 1rem; /* Adjust font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover and click effects */
+  z-index: 10; /* Ensure it stays on top of other elements */
+}
+
+.logout-button:hover {
+  background-color: #2e3b14; /* Darker shade of green on hover */
+}
+
+.logout-button:active {
+  transform: scale(0.95); /* Slightly shrink the button on click */
+  background-color: #24300f; /* Even darker shade for active state */
+}

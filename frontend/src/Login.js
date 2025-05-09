@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import axiosInstance from './axiosConfig.js';
-import './Login.css'; // Import the CSS file for styling
+import './Login.css';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setError(''); // Clear any previous errors
+        setError('');
         axiosInstance.post('/api/users/login/', {
             username,
             password,
@@ -17,7 +19,7 @@ const Login = () => {
         .then(response => {
             console.log('Login Successful', response.data);
             localStorage.setItem('token', response.data.token);
-            window.location.href = '/'; // Redirect to the TaskBoard
+            navigate('/taskboard');
         })
         .catch(error => {
             console.error('There was an error logging in!', error);
@@ -45,6 +47,9 @@ const Login = () => {
                     className="login-input"
                 />
                 <button type="submit" className="login-button">Login</button>
+                <p className="login-register-link">
+                    Don't have an account? <Link to="/register">Sign up now!</Link>
+                </p>
             </form>
         </div>
     );

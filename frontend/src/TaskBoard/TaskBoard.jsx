@@ -24,6 +24,12 @@ import './TaskBoard.css';
 const statuses = ['to do', 'in progress', 'done'];
 
 function TaskBoard() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+      localStorage.removeItem('token');
+      navigate('/login');
+  };
   const [tasks, setTasks] = useState({
     'to do': [],
     'in progress': [],
@@ -31,7 +37,6 @@ function TaskBoard() {
   });
   const [activeTask, setActiveTask] = useState(null);
   const [draggingTaskId, setDraggingTaskId] = useState(null);
-  const navigate = useNavigate();
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 10 } }),
@@ -93,13 +98,17 @@ function TaskBoard() {
           }
         });
   
-        resolve(updatedTasks); // Resolve the Promise with the updated tasks
+        resolve(updatedTasks);
         return updatedTasks;
       });
     });
   };
 
   return (
+    <div className="taskboard-container">
+    <header className="taskboard-header">
+        <button onClick={handleLogout} className="logout-button">Logout</button>
+    </header>
     <DndContext
       sensors={sensors}
       collisionDetection={rectIntersection}
@@ -132,6 +141,7 @@ function TaskBoard() {
         {activeTask && <TaskCard task={activeTask} isDragging />}
       </DragOverlay>
     </DndContext>
+    </div>
   );
 }
 
