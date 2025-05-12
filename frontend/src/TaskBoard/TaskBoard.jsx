@@ -28,9 +28,18 @@ const statuses = ['to do', 'in progress', 'done'];
 function TaskBoard() {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/login');
+  const handleLogout = async () => {
+    try {
+      await axiosInstance.post('/logout/');
+  
+      localStorage.removeItem('token');
+  
+      console.log('Logout successful. Redirecting to login page.'); // Add a success message
+
+      navigate('/login');
+    } catch (error) {
+      console.error('Error logging out:', error.response?.data || error.message);
+    }
   };
 
   const [tasks, setTasks] = useState({

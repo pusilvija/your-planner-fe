@@ -18,7 +18,7 @@ const Login = () => {
             password,
         })
         .then(response => {
-            console.log('Login Successful', response.data);
+            console.log('Login Successful');
             localStorage.setItem('token', response.data.token);
             navigate('/taskboard');
         })
