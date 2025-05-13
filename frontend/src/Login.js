@@ -23,8 +23,8 @@ const Login = () => {
             navigate('/taskboard');
         })
         .catch(error => {
-            console.error('There was an error logging in!', error);
-            setError('Invalid username or password. Please try again.');
+            console.error('Error response:', error.response);
+            setError(error.response?.data?.detail || 'Invalid username or password. Please try again.');
         });
     };
 

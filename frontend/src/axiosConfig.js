@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 // Create an Axios instance
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:8000/api', // Set your base API URL
@@ -10,8 +11,12 @@ axiosInstance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token'); // Retrieve the token from localStorage
     if (token) {
-      // config.headers.Authorization = `Bearer ${token}`; // Attach the token to the Authorization header
-      config.headers.Authorization = `Token ${token}`;
+      // Check the endpoint and set the appropriate token format
+      if (config.url.includes('/taskboard/') || config.url.includes('/tasks/') || config.url.includes('/logout/')) {
+        config.headers.Authorization = `Token ${token}`; // Use 'Token' format for taskboard-related endpoints
+      } else if (config.url.includes('/login/') || config.url.includes('/register/')) {
+        config.headers.Authorization = `Bearer ${token}`; // Use 'Bearer' format for logout, login, and registration
+      }
     }
     return config;
   },
@@ -19,6 +24,7 @@ axiosInstance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
 
 // Add a reusable function to fetch the task board
 export const fetchTaskBoard = async () => {

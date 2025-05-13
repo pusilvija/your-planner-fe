@@ -30,15 +30,21 @@ function TaskBoard() {
 
   const handleLogout = async () => {
     try {
-      await axiosInstance.post('/logout/');
+      console.log('Logging out...'); // Add a console message for logging out
   
+      // Call the backend logout endpoint
+      await axiosInstance.post('/logout/'); // Use POST for logout
+  
+      // Clear the token from localStorage
       localStorage.removeItem('token');
   
       console.log('Logout successful. Redirecting to login page.'); // Add a success message
-
+  
+      // Redirect to the login page
       navigate('/login');
     } catch (error) {
       console.error('Error logging out:', error.response?.data || error.message);
+      // Optionally, show an error message to the user
     }
   };
 
