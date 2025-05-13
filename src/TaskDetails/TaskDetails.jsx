@@ -99,7 +99,7 @@ function TaskDetails() {
                 onChange={handleChange}
               >
                 <option value="to do">To Do</option>
-                <option value="in progress">In Progress</option>
+                <option value="current">Current</option>
                 <option value="done">Done</option>
               </select>
             </td>
