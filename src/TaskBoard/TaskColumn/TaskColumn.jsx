@@ -36,7 +36,7 @@ function TaskColumn({ status, tasks, handleClick, setTasks, updateTaskName }) {
     <div ref={setNodeRef} className="task-column">
       <div className="column-header">
         <h2>{status}</h2>
-        <button className="add-task-btn" onClick={handleAddTask}>+</button>
+        <button className="add-task-btn" onClick={handleAddTask}></button>
       </div>
 
       {tasks.map((task) => (

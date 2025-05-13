@@ -26,22 +26,37 @@
   color: white;
   border: none;
   border-radius: 50%; /* Ensures the button is always a circle */
-  width: 40px; /* Adjusted size for better visibility */
-  height: 40px; /* Same as width to maintain the circle */
+  width: 30px; /* Adjusted size for better visibility */
+  height: 30px; /* Same as width to maintain the circle */
   font-size: 20px;
   cursor: pointer;
   display: flex; /* Use flexbox to center the "+" */
   align-items: center; /* Vertically center the "+" */
   justify-content: center; /* Horizontally center the "+" */
   transition: background-color 0.2s ease, transform 0.2s ease;
+  position: relative; /* Required for the pseudo-element */
+  transform-origin: center; /* Ensure scaling happens from the center */
+}
+
+.add-task-btn::before {
+  content: "+"; /* Add the "+" sign */
+  font-size: 20px; /* Adjust the size of the "+" */
+  color: white; /* Match the button text color */
+  display: flex; /* Use flexbox to keep it centered */
+  align-items: center;
+  justify-content: center;
+  position: absolute; /* Ensure it stays centered */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Offset to center the "+" */
 }
 
 .add-task-btn:hover {
   background-color: #556b2f; /* Darker olive green on hover */
-  transform: scale(1.1); /* Slightly enlarge on hover */
+  transform: scale(1.1); /* Slightly enlarge the button */
 }
 
 .add-task-btn:active {
   background-color: #3e4f1c; /* Darkest olive green on active */
-  transform: scale(0.95); /* Slightly shrink on active */
+  transform: scale(0.95); /* Slightly shrink the button */
 }
