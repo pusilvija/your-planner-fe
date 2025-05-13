@@ -1,12 +1,19 @@
 import axios from 'axios';
 
 
+// Determine the base URL based on the environment
+const baseURL =
+  process.env.NODE_ENV === 'production'
+    ? `${process.env.REACT_APP_RAILWAY_PUBLIC_DOMAIN}/api` // production URL
+    : '/api'; // local development URL
+
+console.log('Base URL:', baseURL); // Log the base URL to verify
+
 // Create an Axios instance
 const axiosInstance = axios.create({
-  baseURL: `${process.env.REACT_APP_RAILWAY_PUBLIC_DOMAIN}/api` || '/api', // Use the environment variable or fallback
+  baseURL, // Dynamically set the base URL
 });
 
-console.log('Base URL:', process.env.REACT_APP_RAILWAY_PUBLIC_DOMAIN); // Log the base URL to verify
 
 // Add a request interceptor to attach the token
 axiosInstance.interceptors.request.use(
