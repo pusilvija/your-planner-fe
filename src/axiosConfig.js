@@ -6,6 +6,8 @@ const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_RAILWAY_PUBLIC_DOMAIN || '/api', // Set your base API URL
 });
 
+console.log('Base URL:', process.env.REACT_APP_RAILWAY_PUBLIC_DOMAIN); // Log the base URL to verify
+
 // Add a request interceptor to attach the token
 axiosInstance.interceptors.request.use(
   (config) => {
