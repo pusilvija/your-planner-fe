@@ -7,16 +7,11 @@ RUN npm install
 COPY . .
 ENV NODE_ENV=production
 
-
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
 RUN npm run build
 
-# Official Nginx image to serve the React app
 FROM nginx:alpine
-
-# Copy the build output from the previous stage to the Nginx web root
 COPY --from=build /app/build /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80 to the outside world
 EXPOSE 80
