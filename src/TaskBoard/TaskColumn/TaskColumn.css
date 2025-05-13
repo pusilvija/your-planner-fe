@@ -40,6 +40,9 @@
   position: relative; /* Required for the pseudo-element */
   transform-origin: center; /* Ensure scaling happens from the center */
   flex-shrink: 0; /* Prevent the button from shrinking in flex containers */
+  box-sizing: border-box; /* Prevent padding/border from affecting dimensions */
+  aspect-ratio: 1 / 1; /* Ensure the button remains a perfect square */
+  -webkit-text-size-adjust: none; /* Prevent scaling on mobile devices */
 }
 
 .add-task-btn::before {
