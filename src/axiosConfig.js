@@ -7,7 +7,7 @@ const baseURL =
     ? `${process.env.REACT_APP_RAILWAY_PUBLIC_DOMAIN}/api` // production URL
     : '/api'; // local development URL
 
-console.log('Base URL:', baseURL); // Log the base URL to verify
+console.log('Base URL:', baseURL, 'NODE: ', process.env.NODE_ENV ); // Log the base URL to verify
 
 // Create an Axios instance
 const axiosInstance = axios.create({

@@ -5,6 +5,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
+ENV NODE_ENV=production
 
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
