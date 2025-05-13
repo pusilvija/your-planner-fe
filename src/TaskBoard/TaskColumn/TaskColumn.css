@@ -29,8 +29,8 @@
   color: white;
   border: none;
   border-radius: 50%; /* Ensures the button is always a circle */
-  width: 35px; /* Ensure width and height are equal */
-  height: 35px; /* Same as width to maintain the circle */
+  width: 35px !important; /* Ensure width and height are equal */
+  height: 35px !important; /* Same as width to maintain the circle */
   font-size: 20px;
   cursor: pointer;
   display: flex; /* Use flexbox to center the "+" */
