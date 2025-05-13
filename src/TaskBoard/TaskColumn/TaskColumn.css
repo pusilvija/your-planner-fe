@@ -25,11 +25,14 @@
   background-color: #6b8e23; /* Medium olive green */
   color: white;
   border: none;
-  border-radius: 50%;
-  width: 30px; /* Slightly larger button */
-  height: 30px;
+  border-radius: 50%; /* Ensures the button is always a circle */
+  width: 40px; /* Adjusted size for better visibility */
+  height: 40px; /* Same as width to maintain the circle */
   font-size: 20px;
   cursor: pointer;
+  display: flex; /* Use flexbox to center the "+" */
+  align-items: center; /* Vertically center the "+" */
+  justify-content: center; /* Horizontally center the "+" */
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
