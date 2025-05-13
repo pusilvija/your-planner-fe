@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Create an Axios instance
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8000/api', // Set your base API URL
+  baseURL: process.env.BASE_URL || '/api', // Set your base API URL
 });
 
 // Add a request interceptor to attach the token
