@@ -17,11 +17,11 @@ import {
 
 import TaskColumn from './TaskColumn/TaskColumn.jsx';
 import TaskCard from './TaskColumn/TaskCard/TaskCard.jsx';
-import useTaskDragHandlers from './useTaskDragHandlers';
+import useTaskDragHandlers from './useTaskDragHandlers.js';
 import { syncTasksToBackend } from '../api.js'; // Updated import
 import './TaskBoard.css';
 import { fetchTaskBoard } from '../axiosConfig.js'; // Import the reusable fetch function
-import axiosInstance from '../axiosConfig';
+import axiosInstance from '../axiosConfig.js';
 
 const statuses = ['to do', 'in progress', 'done'];
 

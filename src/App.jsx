@@ -6,7 +6,7 @@ import TaskDetails from './TaskDetails/TaskDetails.jsx';
 import Login from './Login.js';
 import Register from './Register.js';
 import LandingPage from './LandingPage.js';
-import ProtectedRoute from './ProtectedRoute';
+import ProtectedRoute from './ProtectedRoute.js';
 
 function App() {
   return (
