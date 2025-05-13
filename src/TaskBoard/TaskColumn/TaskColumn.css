@@ -1,7 +1,7 @@
 .task-column {
   background: rgba(249, 249, 249, 0.7); 
-  padding: 1rem;
-  margin: 1rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
   width: 400px;
   min-width: 200px;
   min-height: 500px;
@@ -29,8 +29,8 @@
   color: white;
   border: none;
   border-radius: 50%; /* Ensures the button is always a circle */
-  width: 30px; /* Adjusted size for better visibility */
-  height: 30px; /* Same as width to maintain the circle */
+  width: 35px; /* Ensure width and height are equal */
+  height: 35px; /* Same as width to maintain the circle */
   font-size: 20px;
   cursor: pointer;
   display: flex; /* Use flexbox to center the "+" */
@@ -39,6 +39,7 @@
   transition: background-color 0.2s ease, transform 0.2s ease;
   position: relative; /* Required for the pseudo-element */
   transform-origin: center; /* Ensure scaling happens from the center */
+  flex-shrink: 0; /* Prevent the button from shrinking in flex containers */
 }
 
 .add-task-btn::before {
