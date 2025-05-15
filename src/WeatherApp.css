@@ -4,7 +4,7 @@
     left: 10px;
     font-family: Arial, sans-serif;
     padding: 6px 10px; /* Reduce padding */
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 8px;
     max-width: 250px; /* Reduce width */
     display: flex;
