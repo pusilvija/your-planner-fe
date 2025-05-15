@@ -23,6 +23,22 @@ const WeatherApp = () => {
     }
   };
 
+  const fetchWeatherByCity = async (city) => {
+    const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+    const URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
+
+    try {
+      const response = await axios.get(URL);
+      setWeather(response.data);
+      setError(null); // Clear any previous errors
+    } catch (err) {
+      setError(`Unable to fetch weather data for ${city}.`);
+      setWeather(null); // Clear previous weather data
+    } finally {
+      setLoading(false); // Hide loading state
+    }
+  };
+
   const getUserLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -31,13 +47,13 @@ const WeatherApp = () => {
           fetchWeather(latitude, longitude); // Fetch weather using user's location
         },
         (err) => {
-          setError("Unable to retrieve your location. Please allow location access.");
-          setLoading(false);
+          setError("Unable to retrieve your location. Defaulting to Vilnius.");
+          fetchWeatherByCity("Vilnius"); // Fallback to Vilnius
         }
       );
     } else {
-      setError("Geolocation is not supported by your browser.");
-      setLoading(false);
+      setError("Geolocation is not supported by your browser. Defaulting to Vilnius.");
+      fetchWeatherByCity("Vilnius"); // Fallback to Vilnius
     }
   };
 
