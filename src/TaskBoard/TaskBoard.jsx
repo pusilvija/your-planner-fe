@@ -23,6 +23,9 @@ import './TaskBoard.css';
 import { fetchTaskBoard } from '../axiosConfig.js'; // Import the reusable fetch function
 import axiosInstance from '../axiosConfig.js';
 
+import React from 'react';
+import WeatherApp from '../WeatherApp.js';
+
 const statuses = ['to do', 'in progress', 'done'];
 
 function TaskBoard() {
@@ -118,6 +121,7 @@ function TaskBoard() {
 
   return (
     <div className="taskboard-container">
+      <WeatherApp />
       <header className="taskboard-header">
         <button onClick={handleLogout} className="logout-button">Logout</button>
       </header>

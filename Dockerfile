@@ -5,6 +5,9 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
+
+ARG REACT_APP_WEATHER_API_KEY
+ENV REACT_APP_WEATHER_API_KEY=$REACT_APP_WEATHER_API_KEY
 ENV NODE_ENV=production
 
 RUN npm run build
