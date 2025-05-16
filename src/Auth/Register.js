@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Register.css';
+
 import axiosInstance from '../axiosConfig.js';
+
+import './Register.css';
 
 
 const Register = () => {
