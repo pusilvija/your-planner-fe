@@ -15,8 +15,8 @@ import {
   sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable';
 
-import TaskColumn from './TaskColumn/TaskColumn.jsx';
-import TaskCard from './TaskColumn/TaskCard/TaskCard.jsx';
+import TaskColumn from './TaskColumn.jsx';
+import TaskCard from './TaskCard.jsx';
 import useTaskDragHandlers from './useTaskDragHandlers.js';
 import { syncTasksToBackend } from '../api.js'; // Updated import
 import './TaskBoard.css';
@@ -24,7 +24,7 @@ import { fetchTaskBoard } from '../axiosConfig.js'; // Import the reusable fetch
 import axiosInstance from '../axiosConfig.js';
 
 import React from 'react';
-import WeatherApp from '../WeatherApp.js';
+import WeatherApp from '../WeatherApp/WeatherApp.js';
 
 const statuses = ['to do', 'in progress', 'done'];
 

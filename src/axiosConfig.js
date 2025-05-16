@@ -7,8 +7,6 @@ const baseURL =
     ? `${process.env.REACT_APP_RAILWAY_PUBLIC_DOMAIN}/api` // production URL
     : '/api'; // local development URL
 
-console.log('Base URL:', baseURL, 'NODE: ', process.env.NODE_ENV ); // Log the base URL to verify
-
 // Create an Axios instance
 const axiosInstance = axios.create({
   baseURL, // Dynamically set the base URL
@@ -39,7 +37,6 @@ axiosInstance.interceptors.request.use(
 export const fetchTaskBoard = async () => {
   try {
     const response = await axiosInstance.get('/taskboard/'); // Use axiosInstance to fetch tasks
-    console.log('TaskBoard data:', response.data);
     return response.data; // Return the data for further use
   } catch (error) {
     console.error('Error fetching tasks:', error);

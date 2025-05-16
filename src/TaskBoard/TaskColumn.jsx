@@ -2,8 +2,8 @@ import { useDroppable } from '@dnd-kit/core';
 import { useNavigate } from 'react-router-dom';
 
 import './TaskColumn.css';
-import SortableTaskCard from './TaskCard/SortableTaskCard.jsx';
-import axiosInstance from '../../axiosConfig.js'; // Import axiosInstance
+import SortableTaskCard from './SortableTaskCard.jsx';
+import axiosInstance from '../axiosConfig.js'; // Import axiosInstance
 
 function TaskColumn({ status, tasks, handleClick, setTasks, updateTaskName }) {
   const { setNodeRef } = useDroppable({ id: status });

@@ -52,7 +52,7 @@
 }
 
 .task-card .delete-button {
-  background-image: url(../../../../public/images/trash-icon.png); /* Path to your trash icon */
+  background-image: url(../../public/images/trash-icon.png); /* Path to your trash icon */
 }
 
 .task-card .delete-button:hover {
@@ -60,7 +60,7 @@
 }
 
 .task-card .edit-button {
-  background-image: url(../../../../public/images/edit-icon.png); /* Path to your edit icon */
+  background-image: url(../../public/images/edit-icon.png); /* Path to your edit icon */
 }
 
 .task-card .edit-button:hover {

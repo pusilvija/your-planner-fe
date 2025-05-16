@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import TaskBoard from './TaskBoard/TaskBoard.jsx';
 import TaskDetails from './TaskDetails/TaskDetails.jsx';
-import Login from './Login.js';
-import Register from './Register.js';
+import Login from './Auth/Login.js';
+import Register from './Auth/Register.js';
 import LandingPage from './LandingPage.js';
 import ProtectedRoute from './ProtectedRoute.js';
 
