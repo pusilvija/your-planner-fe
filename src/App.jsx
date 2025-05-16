@@ -8,6 +8,7 @@ import Register from './Auth/Register.js';
 import LandingPage from './LandingPage.js';
 import ProtectedRoute from './ProtectedRoute.js';
 
+
 function App() {
   return (
     <BrowserRouter>

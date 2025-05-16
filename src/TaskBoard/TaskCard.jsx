@@ -1,5 +1,7 @@
 import { useState } from 'react';
+
 import './TaskCard.css';
+
 
 function TaskCard({ task, isDragging, handleDelete, handleUpdate }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -11,7 +13,7 @@ function TaskCard({ task, isDragging, handleDelete, handleUpdate }) {
   };
 
   const handleInputChange = (e) => {
-    setEditedName(e.target.value); // Update the edited name
+    setEditedName(e.target.value);
   };
 
   const handleInputBlur = () => {

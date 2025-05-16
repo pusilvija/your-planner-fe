@@ -1,9 +1,11 @@
 import { useDroppable } from '@dnd-kit/core';
 import { useNavigate } from 'react-router-dom';
 
-import './TaskColumn.css';
 import SortableTaskCard from './SortableTaskCard.jsx';
-import axiosInstance from '../axiosConfig.js'; // Import axiosInstance
+import axiosInstance from '../axiosConfig.js';
+
+import './TaskColumn.css';
+
 
 function TaskColumn({ status, tasks, handleClick, setTasks, updateTaskName }) {
   const { setNodeRef } = useDroppable({ id: status });
@@ -21,7 +23,6 @@ function TaskColumn({ status, tasks, handleClick, setTasks, updateTaskName }) {
       return updatedTasks;
     });
 
-    // Send a DELETE request to the backend using axiosInstance
     axiosInstance
       .delete(`/tasks/${taskId}/delete/`)
       .then(() => {

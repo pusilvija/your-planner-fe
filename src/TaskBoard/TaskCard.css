@@ -1,14 +1,14 @@
 .task-card {
   display: flex;
-  justify-content: space-between; /* Space between task name and buttons */
-  align-items: center; /* Align content vertically */
-  color: #1a1a1a; /* Dark text for contrast */
+  justify-content: space-between;
+  align-items: center;
+  color: #1a1a1a;
   text-decoration: none;
-  background-color: #e6e6d3; /* Light olive background */
+  background-color: #e6e6d3;
   padding: 15px 20px;
   margin-bottom: 15px;
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
   cursor: grab;
   font-size: 1.1em;
@@ -17,25 +17,25 @@
 }
 
 .task-card:hover {
-  background-color: #d4d4b5; /* Slightly darker olive shade on hover */
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
-  transform: translateY(-2px); /* Lift the card slightly */
+  background-color: #d4d4b5;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
 }
 
 .task-card:active {
   cursor: grabbing;
-  transform: scale(0.98); /* Slightly shrink on active */
+  transform: scale(0.98);
 }
 
 .task-card .task-name {
   font-size: 1.2em;
   font-weight: bold;
-  color: #556b2f; /* Olive green for the task name */
+  color: #556b2f;
 }
 
 .task-card .button-group {
-  display: flex; /* Group buttons horizontally */
-  gap: 10px; /* Add space between buttons */
+  display: flex;
+  gap: 10px;
 }
 
 .task-card .delete-button,
@@ -45,33 +45,33 @@
   background-repeat: no-repeat;
   background-position: center;
   border: none;
-  width: 20px; /* Button size */
+  width: 20px;
   height: 20px;
   cursor: pointer;
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .task-card .delete-button {
-  background-image: url(../../public/images/trash-icon.png); /* Path to your trash icon */
+  background-image: url(../../public/images/trash-icon.png);
 }
 
 .task-card .delete-button:hover {
-  transform: scale(1.2); /* Slightly enlarge on hover */
+  transform: scale(1.2);
 }
 
 .task-card .edit-button {
-  background-image: url(../../public/images/edit-icon.png); /* Path to your edit icon */
+  background-image: url(../../public/images/edit-icon.png);
 }
 
 .task-card .edit-button:hover {
-  transform: scale(1.2); /* Slightly enlarge on hover */
+  transform: scale(1.2);
 }
 
 .task-name-input {
-  background-color: inherit; 
+  background-color: inherit;
   font-size: 1.2em;
   font-weight: bold;
-  color: #556b2f; /* Olive green */
+  color: #556b2f;
   border: none;
   border-radius: 5px;
   padding: 5px;

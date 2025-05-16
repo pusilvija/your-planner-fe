@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import {
   DndContext,
   rectIntersection,
@@ -17,39 +18,20 @@ import {
 
 import TaskColumn from './TaskColumn.jsx';
 import TaskCard from './TaskCard.jsx';
+import WeatherApp from '../WeatherApp/WeatherApp.js';
+
 import useTaskDragHandlers from './useTaskDragHandlers.js';
-import { syncTasksToBackend } from '../api.js'; // Updated import
-import './TaskBoard.css';
-import { fetchTaskBoard } from '../axiosConfig.js'; // Import the reusable fetch function
+import { syncTasksToBackend } from '../api.js';
+import { fetchTaskBoard } from '../axiosConfig.js';
 import axiosInstance from '../axiosConfig.js';
 
-import React from 'react';
-import WeatherApp from '../WeatherApp/WeatherApp.js';
+import './TaskBoard.css';
+
 
 const statuses = ['to do', 'in progress', 'done'];
 
 function TaskBoard() {
   const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    try {
-      console.log('Logging out...'); // Add a console message for logging out
-  
-      // Call the backend logout endpoint
-      await axiosInstance.post('/logout/'); // Use POST for logout
-  
-      // Clear the token from localStorage
-      localStorage.removeItem('token');
-  
-      console.log('Logout successful. Redirecting to login page.'); // Add a success message
-  
-      // Redirect to the login page
-      navigate('/login');
-    } catch (error) {
-      console.error('Error logging out:', error.response?.data || error.message);
-      // Optionally, show an error message to the user
-    }
-  };
 
   const [tasks, setTasks] = useState({
     'to do': [],
@@ -64,12 +46,25 @@ function TaskBoard() {
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   );
 
+  // Handle logout
+  const handleLogout = async () => {
+    try {
+      console.log('Logging out...');
+      await axiosInstance.post('/logout/');
+      localStorage.removeItem('token');
+      console.log('Logout successful. Redirecting to login page.');
+      navigate('/login');
+    } catch (error) {
+      console.error('Error logging out:', error.response?.data || error.message);
+    }
+  };
+
   // Fetch tasks from the backend
   useEffect(() => {
     const loadTasks = async () => {
       try {
-        const data = await fetchTaskBoard(); // Fetch tasks using the reusable function
-        setTasks(data || { 'to do': [], 'in progress': [], 'done': [] }); // Handle empty response
+        const data = await fetchTaskBoard();
+        setTasks(data || { 'to do': [], 'in progress': [], 'done': [] });
       } catch (error) {
         console.error('Failed to load tasks:', error);
       }
@@ -83,22 +78,21 @@ function TaskBoard() {
     setTasks,
     setActiveTask,
     setDraggingTaskId,
-    (t) => syncTasksToBackend(t) // Use the updated syncTasksToBackend function
+    (t) => syncTasksToBackend(t)
   );
 
   // Update task name
   const updateTaskName = (taskId, newName) => {
-    return axiosInstance.patch(`/tasks/${taskId}/`, { name: newName })
-      .then(response => {
+    return axiosInstance
+      .patch(`/tasks/${taskId}/`, { name: newName })
+      .then((response) => {
         console.log(`Task ${taskId} updated successfully.`, response.data);
-        setTasks(prevTasks => {
+        setTasks((prevTasks) => {
           const updatedTasks = { ...prevTasks };
 
-          // Iterate through each status to find the task
-          Object.keys(updatedTasks).forEach(status => {
-            const taskIndex = updatedTasks[status].findIndex(task => task.id === taskId);
+          Object.keys(updatedTasks).forEach((status) => {
+            const taskIndex = updatedTasks[status].findIndex((task) => task.id === taskId);
             if (taskIndex !== -1) {
-              // Update the task name
               updatedTasks[status][taskIndex] = {
                 ...updatedTasks[status][taskIndex],
                 name: newName,
@@ -109,9 +103,9 @@ function TaskBoard() {
           return updatedTasks;
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error updating task:', error);
-        throw error; // Re-throw the error so the caller can handle it
+        throw error;
       });
   };
 
@@ -123,7 +117,9 @@ function TaskBoard() {
     <div className="taskboard-container">
       <WeatherApp />
       <header className="taskboard-header">
-        <button onClick={handleLogout} className="logout-button">Logout</button>
+        <button onClick={handleLogout} className="logout-button">
+          Logout
+        </button>
       </header>
       <DndContext
         sensors={sensors}
@@ -132,7 +128,7 @@ function TaskBoard() {
         onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
       >
-        <h1 className="task-board-title">Planner</h1>
+        <h1 className="task-board-title">Your Planner</h1>
         <div className="task-board">
           {statuses.map((status) => (
             <SortableContext
@@ -151,7 +147,6 @@ function TaskBoard() {
             </SortableContext>
           ))}
         </div>
-
         <DragOverlay>
           {activeTask && <TaskCard task={activeTask} isDragging />}
         </DragOverlay>

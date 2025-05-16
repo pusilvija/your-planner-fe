@@ -1,12 +1,15 @@
-import './TaskDetails.css';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import axiosInstance from '../axiosConfig'; // Import axiosInstance
+
+import axiosInstance from '../axiosConfig';
+
+import './TaskDetails.css';
+
 
 function TaskDetails() {
-  const { taskId } = useParams(); // Get taskId from URL
+  const { taskId } = useParams();
   const navigate = useNavigate();
-  const location = useLocation(); // Use useLocation hook to get the current location
+  const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const initialStatus = queryParams.get('status') || 'to do';
 
@@ -42,11 +45,10 @@ function TaskDetails() {
 
   const handleSave = () => {
     if (taskId === 'new') {
-      // Create a new task
       axiosInstance.post('/tasks/add-new-task/', taskData)
         .then((response) => {
           console.log('Task created successfully:', response.data);
-          navigate('/taskboard'); // Navigate back to the task board
+          navigate('/taskboard');
         })
         .catch((error) => {
           console.error('Error creating task:', error);
@@ -56,7 +58,7 @@ function TaskDetails() {
       axiosInstance.patch(`/tasks/${taskId}/`, taskData)
         .then((response) => {
           console.log('Task updated successfully:', response.data);
-          navigate('/taskboard'); // Navigate back to the task board
+          navigate('/taskboard');
         })
         .catch((error) => {
           console.error('Error updating task:', error);
@@ -99,7 +101,7 @@ function TaskDetails() {
                 onChange={handleChange}
               >
                 <option value="to do">To Do</option>
-                <option value="current">Current</option>
+                <option value="in progress">In Progress</option>
                 <option value="done">Done</option>
               </select>
             </td>

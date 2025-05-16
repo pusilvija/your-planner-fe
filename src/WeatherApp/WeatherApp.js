@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+
 import './WeatherApp.css';
+
 
 const WeatherApp = () => {
   const [weather, setWeather] = useState(null);
@@ -14,12 +16,12 @@ const WeatherApp = () => {
     try {
       const response = await axios.get(URL);
       setWeather(response.data);
-      setError(null); // Clear any previous errors
+      setError(null);
     } catch (err) {
       setError("Unable to fetch weather data. Please try again.");
-      setWeather(null); // Clear previous weather data
+      setWeather(null);
     } finally {
-      setLoading(false); // Hide loading state
+      setLoading(false);
     }
   };
 
@@ -30,12 +32,12 @@ const WeatherApp = () => {
     try {
       const response = await axios.get(URL);
       setWeather(response.data);
-      setError(null); // Clear any previous errors
+      setError(null);
     } catch (err) {
       setError(`Unable to fetch weather data for ${city}.`);
-      setWeather(null); // Clear previous weather data
+      setWeather(null);
     } finally {
-      setLoading(false); // Hide loading state
+      setLoading(false);
     }
   };
 
@@ -44,21 +46,21 @@ const WeatherApp = () => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          fetchWeather(latitude, longitude); // Fetch weather using user's location
+          fetchWeather(latitude, longitude);
         },
         (err) => {
           setError("Unable to retrieve your location. Defaulting to Vilnius.");
-          fetchWeatherByCity("Vilnius"); // Fallback to Vilnius
+          fetchWeatherByCity("Vilnius");
         }
       );
     } else {
       setError("Geolocation is not supported by your browser. Defaulting to Vilnius.");
-      fetchWeatherByCity("Vilnius"); // Fallback to Vilnius
+      fetchWeatherByCity("Vilnius");
     }
   };
 
   useEffect(() => {
-    getUserLocation(); // Get user's location on component mount
+    getUserLocation();
   }, []);
 
   if (loading) {

@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { debounce } from 'lodash';
 
+
 const statuses = ['to do', 'in progress', 'done'];
 
 export default function useTaskDragHandlers(tasks, setTasks, setActiveTask, setDraggingTaskId, syncWithBackend) {
@@ -116,7 +117,6 @@ export default function useTaskDragHandlers(tasks, setTasks, setActiveTask, setD
     setDraggingTaskId(null);
 
     const activeId = active.id.toString();
-    // const overId = over?.id.toString();
 
     // If there's no valid drop target, do nothing.
     if (!over && !originalPosition) {
