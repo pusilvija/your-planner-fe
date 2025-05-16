@@ -2,7 +2,7 @@ import { useDroppable } from '@dnd-kit/core';
 import { useNavigate } from 'react-router-dom';
 
 import SortableTaskCard from './SortableTaskCard.jsx';
-import axiosInstance from '../axiosConfig.js';
+import { deleteTask } from '../services/taskService.js';
 
 import './TaskColumn.css';
 
@@ -15,22 +15,19 @@ function TaskColumn({ status, tasks, handleClick, setTasks, updateTaskName }) {
     navigate(`/tasks/new?status=${status}`);
   };
 
-  const handleDelete = (taskId) => {
-    // Remove the task from the frontend state
-    setTasks((prevTasks) => {
-      const updatedTasks = { ...prevTasks };
-      updatedTasks[status] = updatedTasks[status].filter((task) => task.id !== taskId);
-      return updatedTasks;
-    });
-
-    axiosInstance
-      .delete(`/tasks/${taskId}/delete/`)
-      .then(() => {
-        console.log(`Task ${taskId} deleted successfully.`);
-      })
-      .catch((error) => {
-        console.error('Error deleting task:', error);
+  const handleDelete = async (taskId) => {
+    try {
+      setTasks((prevTasks) => {
+        const updatedTasks = { ...prevTasks };
+        updatedTasks[status] = updatedTasks[status].filter((task) => task.id !== taskId);
+        return updatedTasks;
       });
+
+      await deleteTask(taskId);
+      console.log(`Task ${taskId} deleted successfully.`);
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    }
   };
 
   return (
@@ -46,7 +43,7 @@ function TaskColumn({ status, tasks, handleClick, setTasks, updateTaskName }) {
           task={task}
           onClick={() => handleClick(task.id)}
           handleDelete={handleDelete}
-          handleUpdate={(taskId, newName) => updateTaskName(taskId, newName)}
+          handleUpdate={(taskId, newName) => updateTaskName(taskId, newName, setTasks)}
         />
       ))}
     </div>

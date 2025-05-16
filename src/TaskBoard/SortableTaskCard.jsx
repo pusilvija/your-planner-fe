@@ -4,6 +4,14 @@ import { CSS } from '@dnd-kit/utilities';
 import TaskCard from './TaskCard';
 
 
+function getSortableStyle(transform, transition, isDragging) {
+  return {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+  };
+}
+
 function SortableTaskCard({ task, onClick, handleDelete, handleUpdate }) {
   const {
     attributes,
@@ -14,16 +22,13 @@ function SortableTaskCard({ task, onClick, handleDelete, handleUpdate }) {
     isDragging,
   } = useSortable({ id: task.id.toString() });
 
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-    opacity: isDragging ? 0.5 : 1,
-  };
+  const style = getSortableStyle(transform, transition, isDragging);
+  const dragProps = task.isEditing ? {} : { ...attributes, ...listeners }; // Disable drag attributes & listeners if editing
+
   return (
     <div
       ref={setNodeRef}
-      {...(task.isEditing ? {} : attributes)} // Disable drag attributes if editing
-      {...(task.isEditing ? {} : listeners)} // Disable drag listeners if editing
+      {...dragProps}
       style={style}
       onClick={onClick}
     >

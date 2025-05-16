@@ -21,7 +21,7 @@ const Register = () => {
 
         axiosInstance.post('/users/register/', {
             username,
-            email,
+            email, // TODO: Make email useful
             password,
         })
         .then(response => {

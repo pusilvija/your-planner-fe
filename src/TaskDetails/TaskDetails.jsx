@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
-import axiosInstance from '../axiosConfig';
+import { fetchTaskDetails, createTask, updateTask } from '../services/taskService';
 
 import './TaskDetails.css';
 
@@ -13,7 +13,6 @@ function TaskDetails() {
   const queryParams = new URLSearchParams(location.search);
   const initialStatus = queryParams.get('status') || 'to do';
 
-  const [task, setTask] = useState(null);
   const [taskData, setTaskData] = useState({
     name: '',
     description: '',
@@ -21,16 +20,23 @@ function TaskDetails() {
     category: '',
   });
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  // Fetch task details if editing an existing task
   useEffect(() => {
     if (taskId !== 'new') {
-      // Fetch task details when editing an existing task
-      axiosInstance.get(`/tasks/${taskId}/`)
+      setLoading(true);
+      fetchTaskDetails(taskId)
         .then((response) => {
-          setTask(response.data);
           setTaskData(response.data);
         })
         .catch((error) => {
           console.error('Error fetching task details:', error);
+          setError('Failed to fetch task details.');
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
   }, [taskId]);
@@ -43,28 +49,32 @@ function TaskDetails() {
     }));
   };
 
-  const handleSave = () => {
-    if (taskId === 'new') {
-      axiosInstance.post('/tasks/add-new-task/', taskData)
-        .then((response) => {
-          console.log('Task created successfully:', response.data);
-          navigate('/taskboard');
-        })
-        .catch((error) => {
-          console.error('Error creating task:', error);
-        });
-    } else {
-      // Update an existing task
-      axiosInstance.patch(`/tasks/${taskId}/`, taskData)
-        .then((response) => {
-          console.log('Task updated successfully:', response.data);
-          navigate('/taskboard');
-        })
-        .catch((error) => {
-          console.error('Error updating task:', error);
-        });
+  const handleSave = async () => {
+    setLoading(true);
+    try {
+      if (taskId === 'new') {
+        await createTask(taskData);
+        console.log('Task created successfully.');
+      } else {
+        await updateTask(taskId, taskData);
+        console.log('Task updated successfully.');
+      }
+      navigate('/taskboard');
+    } catch (error) {
+      console.error('Error saving task:', error);
+      setError('Failed to save task. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="error-message">{error}</div>;
+  }
 
   return (
     <div>
@@ -108,8 +118,12 @@ function TaskDetails() {
           </tr>
         </tbody>
       </table>
-      <button className="taskdetails-buttons" id="save-button" onClick={handleSave}>Save</button>
-      <button className="taskdetails-buttons" id="back-button" onClick={() => window.history.back()}>Back</button>
+      <button className="taskdetails-buttons" id="save-button" onClick={handleSave}>
+        Save
+      </button>
+      <button className="taskdetails-buttons" id="back-button" onClick={() => navigate(-1)}>
+        Back
+      </button>
     </div>
   );
 }

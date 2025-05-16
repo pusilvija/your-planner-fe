@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+
 import axiosInstance from '../axiosConfig.js';
+
 import './Login.css';
 
 
@@ -50,6 +52,7 @@ const Login = () => {
                 <button type="submit" className="login-button">Login</button>
                 <p className="login-register-link">
                     Don't have an account? <Link to="/register">Sign up now!</Link>
+                    {/* TODO: Add forgot password? */}
                 </p>
             </form>
         </div>

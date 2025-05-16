@@ -1,12 +1,12 @@
 import { useState, useCallback } from 'react';
 import { debounce } from 'lodash';
 
+import { STATUSES } from '../constants.js';
 
-const statuses = ['to do', 'in progress', 'done'];
 
 export default function useTaskDragHandlers(tasks, setTasks, setActiveTask, setDraggingTaskId, syncWithBackend) {
   const findTaskStatus = (id) => {
-    return statuses.find((status) =>
+    return STATUSES.find((status) =>
       Array.isArray(tasks[status]) && tasks[status].some((task) => task.id.toString() === id)
     );
   };
@@ -18,7 +18,7 @@ export default function useTaskDragHandlers(tasks, setTasks, setActiveTask, setD
       const updatedTasks = { ...prev };
   
       // Ensure all statuses have an array, even if empty
-      statuses.forEach((status) => {
+      STATUSES.forEach((status) => {
         if (!Array.isArray(updatedTasks[status])) {
           updatedTasks[status] = [];
         }
@@ -56,7 +56,7 @@ export default function useTaskDragHandlers(tasks, setTasks, setActiveTask, setD
       const activeStatus = findTaskStatus(activeId);
       let overStatus;
   
-      if (statuses.includes(overId)) {
+      if (STATUSES.includes(overId)) {
         overStatus = overId;
       } else {
         overStatus = findTaskStatus(overId);

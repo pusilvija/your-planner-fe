@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -20,24 +20,25 @@ import TaskColumn from './TaskColumn.jsx';
 import TaskCard from './TaskCard.jsx';
 import WeatherApp from '../WeatherApp/WeatherApp.js';
 
-import useTaskDragHandlers from './useTaskDragHandlers.js';
+import useTaskDragHandlers from '../hooks/useTaskDragHandlers.js';
+import useFetchTasks from '../hooks/useFetchTasks.js';
+import { updateTaskName } from '../services/taskService.js';
+import Logout from '../Auth/Logout.js';
 import { syncTasksToBackend } from '../api.js';
-import { fetchTaskBoard } from '../axiosConfig.js';
-import axiosInstance from '../axiosConfig.js';
+import { STATUSES } from '../constants.js';
 
 import './TaskBoard.css';
 
 
-const statuses = ['to do', 'in progress', 'done'];
-
 function TaskBoard() {
   const navigate = useNavigate();
 
-  const [tasks, setTasks] = useState({
-    'to do': [],
-    'in progress': [],
-    'done': [],
-  });
+  const [tasks, setTasks] = useState(
+    STATUSES.reduce((acc, status) => {
+      acc[status] = [];
+      return acc;
+    }, {})
+  );
   const [activeTask, setActiveTask] = useState(null);
   const [draggingTaskId, setDraggingTaskId] = useState(null);
 
@@ -46,32 +47,9 @@ function TaskBoard() {
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   );
 
-  // Handle logout
-  const handleLogout = async () => {
-    try {
-      console.log('Logging out...');
-      await axiosInstance.post('/logout/');
-      localStorage.removeItem('token');
-      console.log('Logout successful. Redirecting to login page.');
-      navigate('/login');
-    } catch (error) {
-      console.error('Error logging out:', error.response?.data || error.message);
-    }
-  };
+  const { handleLogout } = Logout();
 
-  // Fetch tasks from the backend
-  useEffect(() => {
-    const loadTasks = async () => {
-      try {
-        const data = await fetchTaskBoard();
-        setTasks(data || { 'to do': [], 'in progress': [], 'done': [] });
-      } catch (error) {
-        console.error('Failed to load tasks:', error);
-      }
-    };
-
-    loadTasks();
-  }, []);
+  useFetchTasks(setTasks);
 
   const { handleDragStart, handleDragOver, handleDragEnd } = useTaskDragHandlers(
     tasks,
@@ -80,34 +58,6 @@ function TaskBoard() {
     setDraggingTaskId,
     (t) => syncTasksToBackend(t)
   );
-
-  // Update task name
-  const updateTaskName = (taskId, newName) => {
-    return axiosInstance
-      .patch(`/tasks/${taskId}/`, { name: newName })
-      .then((response) => {
-        console.log(`Task ${taskId} updated successfully.`, response.data);
-        setTasks((prevTasks) => {
-          const updatedTasks = { ...prevTasks };
-
-          Object.keys(updatedTasks).forEach((status) => {
-            const taskIndex = updatedTasks[status].findIndex((task) => task.id === taskId);
-            if (taskIndex !== -1) {
-              updatedTasks[status][taskIndex] = {
-                ...updatedTasks[status][taskIndex],
-                name: newName,
-              };
-            }
-          });
-
-          return updatedTasks;
-        });
-      })
-      .catch((error) => {
-        console.error('Error updating task:', error);
-        throw error;
-      });
-  };
 
   const handleClick = (taskId) => {
     navigate(`/tasks/${taskId}`);
@@ -130,7 +80,7 @@ function TaskBoard() {
       >
         <h1 className="task-board-title">Your Planner</h1>
         <div className="task-board">
-          {statuses.map((status) => (
+          {STATUSES.map((status) => (
             <SortableContext
               key={status}
               id={status}
