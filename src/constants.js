@@ -1,1 +1,1 @@
-export const STATUSES = [TO_DO, IN_PROGRESS, DONE];
+export const STATUSES = ['to do', 'in progress', 'done'];
