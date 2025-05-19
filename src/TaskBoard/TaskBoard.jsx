@@ -18,12 +18,10 @@ import {
 
 import TaskColumn from './TaskColumn.jsx';
 import TaskCard from './TaskCard.jsx';
-import WeatherApp from '../WeatherApp/WeatherApp.js';
 
 import useTaskDragHandlers from '../hooks/useTaskDragHandlers.js';
 import useFetchTasks from '../hooks/useFetchTasks.js';
 import { updateTaskName } from '../services/taskService.js';
-import Logout from '../Auth/Logout.js';
 import { syncTasksToBackend } from '../api.js';
 import { STATUSES } from '../constants.js';
 
@@ -47,8 +45,6 @@ function TaskBoard() {
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   );
 
-  const { handleLogout } = Logout();
-
   useFetchTasks(setTasks);
 
   const { handleDragStart, handleDragOver, handleDragEnd } = useTaskDragHandlers(
@@ -65,12 +61,6 @@ function TaskBoard() {
 
   return (
     <div className="taskboard-container">
-      <WeatherApp />
-      <header className="taskboard-header">
-        <button onClick={handleLogout} className="logout-button">
-          Logout
-        </button>
-      </header>
       <DndContext
         sensors={sensors}
         collisionDetection={rectIntersection}

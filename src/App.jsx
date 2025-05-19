@@ -5,39 +5,32 @@ import TaskBoard from './TaskBoard/TaskBoard.jsx';
 import TaskDetails from './TaskDetails/TaskDetails.jsx';
 import Login from './Auth/Login.js';
 import Register from './Auth/Register.js';
-import LandingPage from './LandingPage.js';
 import ProtectedRoute from './ProtectedRoute.js';
-
+import MainLayout from './MainLayout.jsx';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         {/* Public Routes */}
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* Protected Routes */}
+        {/* Protected Routes with Toolbar */}
         <Route
-          path="/taskboard"
           element={
             <ProtectedRoute>
-              <TaskBoard />
+              <MainLayout />
             </ProtectedRoute>
           }
-        />
-        <Route
-          path="/tasks/:taskId"
-          element={
-            <ProtectedRoute>
-              <TaskDetails />
-            </ProtectedRoute>
-          }
-        />
+        >
+          <Route path="/taskboard" element={<TaskBoard />} />
+          <Route path="/tasks/:taskId" element={<TaskDetails />} />
+        </Route>
 
-        {/* Redirect all unknown routes to the main page (LandingPage) */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+        {/* Redirect all unknown routes to the login page */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   );
