@@ -33,15 +33,26 @@ axiosInstance.interceptors.request.use(
 );
 
 
-// Add a reusable function to fetch the task board
 export const fetchTaskBoard = async () => {
   try {
-    const response = await axiosInstance.get('/taskboard/'); // Use axiosInstance to fetch tasks
-    return response.data; // Return the data for further use
+    const response = await axiosInstance.get('/taskboard/');
+    return response.data;
   } catch (error) {
     console.error('Error fetching tasks:', error);
-    throw error; // Re-throw the error for the caller to handle
+    throw error;
   }
 };
+
+
+export const fetchTasks = async () => {
+  try {
+    const response = await axiosInstance.get('/tasks/');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching tasks:', error);
+    throw error;
+  }
+};
+
 
 export default axiosInstance;

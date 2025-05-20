@@ -1,23 +1,18 @@
 import { useEffect } from 'react';
 
-import { fetchTaskBoard } from '../axiosConfig.js';
-import { STATUSES } from '../constants.js';
+import { fetchTasks } from '../axiosConfig.js';
 
 
 const useFetchTasks = (setTasks) => {
   useEffect(() => {
     const loadTasks = async () => {
       try {
-        const data = await fetchTaskBoard();
-        setTasks(
-          data ||
-            STATUSES.reduce((acc, status) => {
-              acc[status] = [];
-              return acc;
-            }, {})
-        );
+        const data = await fetchTasks();
+
+        setTasks(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error('Failed to load tasks:', error);
+        setTasks([]);
       }
     };
 

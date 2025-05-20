@@ -36,7 +36,7 @@ function Toolbar() {
             <button onClick={handleHome}>Home</button>
           </li>
           <li>
-            <button onClick={() => console.log('Tasks clicked')}>Tasks</button>
+            <button onClick={handleTasks}>Tasks</button>
           </li>
           <li>
           <button onClick={handleLogout}>Logout</button>

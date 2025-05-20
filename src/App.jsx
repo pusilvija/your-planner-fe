@@ -7,6 +7,8 @@ import Login from './Auth/Login.js';
 import Register from './Auth/Register.js';
 import ProtectedRoute from './ProtectedRoute.js';
 import MainLayout from './MainLayout.jsx';
+import TasksPage from './TasksPage.jsx';
+
 
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
           }
         >
           <Route path="/taskboard" element={<TaskBoard />} />
+          <Route path="/tasks" element={<TasksPage />} />
           <Route path="/tasks/:taskId" element={<TaskDetails />} />
         </Route>
 

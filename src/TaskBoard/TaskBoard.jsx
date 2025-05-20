@@ -20,7 +20,7 @@ import TaskColumn from './TaskColumn.jsx';
 import TaskCard from './TaskCard.jsx';
 
 import useTaskDragHandlers from '../hooks/useTaskDragHandlers.js';
-import useFetchTasks from '../hooks/useFetchTasks.js';
+import useFetchTaskBoard from '../hooks/useFetchTaskBoard.js';
 import { updateTaskName } from '../services/taskService.js';
 import { syncTasksToBackend } from '../api.js';
 import { STATUSES } from '../constants.js';
@@ -45,7 +45,7 @@ function TaskBoard() {
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   );
 
-  useFetchTasks(setTasks);
+  useFetchTaskBoard(setTasks);
 
   const { handleDragStart, handleDragOver, handleDragEnd } = useTaskDragHandlers(
     tasks,

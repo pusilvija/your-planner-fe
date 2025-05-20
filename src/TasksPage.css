@@ -1,0 +1,60 @@
+.tasks-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    table-layout: fixed;
+  }
+  
+.tasks-table th,
+.tasks-table td {
+  padding: 10px;
+  text-align: left;
+  border: none !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tasks-table th {
+  background-color: rgba(62, 79, 28, 0.8);
+  color: white;
+  font-weight: bold;
+}
+
+.tasks-table input,
+.tasks-table select {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1rem;
+  padding: 5px;
+  border: none;
+  border-radius: 4px;
+}
+
+.tasks-table input:focus,
+.tasks-table select:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.tasks-page .delete-button {
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.tasks-page .delete-button {
+  background-image: url(/public/images/trash-icon.png);
+}
+
+.tasks-page .delete-button:hover {
+  transform: scale(1.2);
+}
