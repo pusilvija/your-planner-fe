@@ -13,20 +13,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Log in to GitHub Container Registry
+      - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Docker image with secrets
         run: |
           docker build \
             --build-arg REACT_APP_RAILWAY_PUBLIC_DOMAIN=${{ secrets.REACT_APP_RAILWAY_PUBLIC_DOMAIN }} \
             --build-arg REACT_APP_WEATHER_API_KEY=${{ secrets.REACT_APP_WEATHER_API_KEY }} \
-            -t ${{ github.actor }}/${{ github.repository }}:release .
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/your-planner-fe:release .
 
       - name: Push Docker image
         run: |
-          docker push ${{ github.actor }}/${{ github.repository }}:release
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/your-planner-fe:release
