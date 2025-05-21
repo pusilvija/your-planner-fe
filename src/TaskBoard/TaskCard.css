@@ -4,7 +4,7 @@
   align-items: center;
   color: #1a1a1a;
   text-decoration: none;
-  background-color: #e6e6d3;
+  background-color: #d4d4b5;
   padding: 15px 20px;
   margin-bottom: 15px;
   border-radius: 10px;
@@ -17,7 +17,7 @@
 }
 
 .task-card:hover {
-  background-color: #d4d4b5;
+  background-color:  #e6e6d3;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
   transform: translateY(-2px);
 }
