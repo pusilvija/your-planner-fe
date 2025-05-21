@@ -7,8 +7,13 @@ RUN npm install
 COPY . .
 ENV NODE_ENV=production
 
-# Copy .env file containing the API key
-COPY .env .env
+# Build arguments (passed at build time)
+ARG REACT_APP_RAILWAY_PUBLIC_DOMAIN
+ARG REACT_APP_WEATHER_API_KEY
+
+# Set as environment variables (available at build and runtime)
+ENV REACT_APP_RAILWAY_PUBLIC_DOMAIN=$REACT_APP_RAILWAY_PUBLIC_DOMAIN
+ENV REACT_APP_WEATHER_API_KEY=$REACT_APP_WEATHER_API_KEY
 
 RUN npm run build
 
