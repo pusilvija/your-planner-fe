@@ -29,3 +29,15 @@ jobs:
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/your-planner-fe:release
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Trigger Railway deployment
+        run: |
+          node trigger-railway-deploy.js \
+            ${{ secrets.RAILWAY_TOKEN }} \
+            ${{ secrets.RAILWAY_ENVIRONMENT_ID }} \
+            ${{ secrets.RAILWAY_SERVICE_ID }}
