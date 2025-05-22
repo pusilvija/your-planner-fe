@@ -38,6 +38,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Debug Railway secrets
+        run: |
+          echo "TOKEN: ${{ secrets.RAILWAY_TOKEN }}"
+          echo "ENV: ${{ secrets.RAILWAY_ENVIRONMENT_ID }}"
+          echo "SERVICE: ${{ secrets.RAILWAY_SERVICE_ID }}"
+
       - name: Trigger Railway deployment
         run: |
           node trigger-railway-deploy.js \
