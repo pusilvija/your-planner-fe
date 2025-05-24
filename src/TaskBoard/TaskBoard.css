@@ -10,26 +10,10 @@
   text-align: center;
 }
 
-.logout-button {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  padding: 0.5rem 1rem;
-  background-color: #3e4f1c;
-  color: #ffffff;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  z-index: 10;
-}
-
-.logout-button:hover {
-  background-color: #2e3b14;
-}
-
-.logout-button:active {
-  transform: scale(0.95);
-  background-color: #24300f;
+.taskboard-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 50px;
+  box-sizing: border-box;
 }
