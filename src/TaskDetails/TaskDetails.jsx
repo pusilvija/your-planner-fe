@@ -20,8 +20,11 @@ function TaskDetails() {
     category: '',
   });
 
+  const [initialTaskData, setInitialTaskData] = useState(null); // Store the initial data
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [unsavedChanges, setUnsavedChanges] = useState(false); // Track unsaved changes
+
 
   // Fetch task details if editing an existing task
   useEffect(() => {
@@ -30,6 +33,7 @@ function TaskDetails() {
       fetchTaskDetails(taskId)
         .then((response) => {
           setTaskData(response.data);
+          setInitialTaskData(response.data);
         })
         .catch((error) => {
           console.error('Error fetching task details:', error);
@@ -40,6 +44,38 @@ function TaskDetails() {
         });
     }
   }, [taskId]);
+  
+  // For new tasks, use the default state as initial data
+  useEffect(() => {
+    if (taskId === 'new') {
+      setInitialTaskData(taskData);
+    }
+  }, [taskId, taskData]);
+
+
+  // Detect unsaved changes
+  useEffect(() => {
+    if (JSON.stringify(taskData) !== JSON.stringify(initialTaskData)) {
+      setUnsavedChanges(true);
+    } else {
+      setUnsavedChanges(false);
+    }
+  }, [taskData, initialTaskData]);
+
+  // Warn user before leaving the page
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      if (unsavedChanges) {
+        e.preventDefault();
+        e.returnValue = ''; // Required for modern browsers
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [unsavedChanges]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -137,7 +173,16 @@ function TaskDetails() {
       <button className="taskdetails-buttons" id="save-button" onClick={handleSave}>
         Save
       </button>
-      <button className="taskdetails-buttons" id="back-button" onClick={() => navigate(-1)}>
+      <button
+        className="taskdetails-buttons"
+        id="back-button"
+        onClick={() => {
+          if (unsavedChanges && !window.confirm('You have unsaved changes. Are you sure you want to leave?')) {
+            return;
+          }
+          navigate(-1);
+        }}
+      >
         Back
       </button>
       <button className="taskdetails-buttons" id="delete-button" onClick={handleDelete}>
