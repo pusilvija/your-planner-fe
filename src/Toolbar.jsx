@@ -9,14 +9,19 @@ function Toolbar() {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
 
-  const { handleLogout } = Logout();
   const handleHome = () => {
+    // navigate('/');
+  }
+
+  const handleTaskBoard = () => {
     navigate('/taskboard');
   };
   const handleTasks = () => {
     navigate('/tasks');
   };
-  
+
+  const { handleLogout } = Logout();
+
   return (
     <div className={`toolbar ${collapsed ? 'collapsed' : ''}`}>
       <button
@@ -34,6 +39,9 @@ function Toolbar() {
         <ul className="toolbar-menu">
           <li>
             <button onClick={handleHome}>Home</button>
+          </li>
+          <li>
+            <button onClick={handleTaskBoard}>Task board</button>
           </li>
           <li>
             <button onClick={handleTasks}>Tasks</button>
