@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
-import { fetchTaskDetails, createTask, updateTask } from '../services/taskService';
+import { fetchTaskDetails, createTask, updateTask, deleteTask } from '../services/taskService';
 
 import './TaskDetails.css';
 
@@ -47,6 +47,22 @@ function TaskDetails() {
       ...prevData,
       [name]: value,
     }));
+  };
+
+  const handleDelete = async () => {
+    if (window.confirm('Are you sure you want to delete this task?')) {
+      setLoading(true);
+      try {
+        await deleteTask(taskId); // Call the deleteTask function
+        console.log('Task deleted successfully.');
+        navigate('/taskboard'); // Navigate back to the task board
+      } catch (error) {
+        console.error('Error deleting task:', error);
+        setError('Failed to delete task. Please try again.');
+      } finally {
+        setLoading(false);
+      }
+    }
   };
 
   const handleSave = async () => {
@@ -123,6 +139,9 @@ function TaskDetails() {
       </button>
       <button className="taskdetails-buttons" id="back-button" onClick={() => navigate(-1)}>
         Back
+      </button>
+      <button className="taskdetails-buttons" id="delete-button" onClick={handleDelete}>
+        Delete
       </button>
     </div>
   );
