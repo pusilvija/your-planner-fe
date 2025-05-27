@@ -8,14 +8,14 @@ import Register from './Auth/Register.js';
 import ProtectedRoute from './ProtectedRoute.js';
 import MainLayout from './MainLayout.jsx';
 import TasksPage from './TasksPage.jsx';
-
+import LandingPage from './LandingPage.js';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         {/* Public Routes */}
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<LandingPage />} /> {/* Landing Page */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
@@ -32,8 +32,8 @@ function App() {
           <Route path="/tasks/:taskId" element={<TaskDetails />} />
         </Route>
 
-        {/* Redirect all unknown routes to the login page */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        {/* Redirect all unknown routes to the landing page */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );
