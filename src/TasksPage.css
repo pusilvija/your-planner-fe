@@ -91,7 +91,7 @@
 /* Make the last column smaller */
 .tasks-table th:last-child,
 .tasks-table td:last-child {
-  width: 50px; /* Set the desired width for the last column */
+  width: 80px; /* Set the desired width for the last column */
   text-align: center; /* Optional: Center-align the content */
 }
 
