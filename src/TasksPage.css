@@ -1,8 +1,8 @@
 .tasks-page h1 {
-  color: #555;
+  color: var(--text-color-gray);
 }
 .tasks-table {
-    width: 95%;
+    width: 100%;
     border-collapse: collapse;
     margin: 0 auto;
     margin-bottom: 20px;
@@ -70,7 +70,6 @@
   margin-right: 5px;
   cursor: pointer;
   transition: transform 0.2s ease, background-color 0.2s ease;
-  /* filter: invert(20%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(50%) contrast(100%); */
 }
 
 .tasks-page .delete-button {
@@ -101,7 +100,7 @@
   align-items: center;
   gap: 10px; /* Add spacing between dropdown and input */
   margin-bottom: 20px; /* Add spacing below the filter section */
-  width: 95%; /* Match the width of the table */
+  width: 100%; /* Match the width of the table */
   margin-left: auto; /* Center the container horizontally */
   margin-right: auto; /* Center the container horizontally */
 }

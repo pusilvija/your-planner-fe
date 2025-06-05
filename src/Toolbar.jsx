@@ -23,16 +23,15 @@ function Toolbar() {
   const { handleLogout } = Logout();
 
   return (
-    <div className='toolbar-wrapper'>
       <div className={`toolbar ${collapsed ? 'collapsed' : ''}`}>
       <button
         className="collapse-button"
         onClick={() => setCollapsed(!collapsed)}
       >
         {collapsed ? (
-          <span className="sandwich-icon"></span> // Show sandwich icon when collapsed
+          <span className="sandwich-icon"></span>
         ) : (
-          <span className="arrow-icon">&laquo;</span> // Show left arrow when expanded
+          <span className="arrow-icon">&laquo;</span>
         )}
       </button>
         {!collapsed && (
@@ -41,10 +40,10 @@ function Toolbar() {
               <button onClick={handleHome}>Home</button>
             </li>
             <li>
-              <button onClick={handleTaskBoard}>Task board</button>
+              <button onClick={handleTaskBoard}>Task Board</button>
             </li>
             <li>
-              <button onClick={handleTasks}>Tasks</button>
+              <button onClick={handleTasks}>All Tasks</button>
             </li>
             <li>
             <button onClick={handleLogout}>Logout</button>
@@ -57,7 +56,6 @@ function Toolbar() {
           </div>
       )}
       </div>
-    </div>
   );
 }
 

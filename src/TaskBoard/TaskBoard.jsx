@@ -68,7 +68,7 @@ function TaskBoard() {
         onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
       >
-        <h1 className="task-board-title">Your Planner</h1>
+        <h1 className="task-board-title">Task board</h1>
         <div className="task-board">
           {STATUSES.map((status) => (
             <SortableContext
