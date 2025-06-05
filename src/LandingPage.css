@@ -10,8 +10,9 @@
 }
 
 .landing-logo {
-    width: 500px; /* Adjust the size of the logo */
-    height: auto;
+    width: 100%; /* Make the logo take up the full width of its container */
+    max-width: 400px; /* Limit the maximum width of the logo */
+    height: auto; /* Maintain the aspect ratio */
     margin-bottom: 2rem; /* Add spacing below the logo */
     margin-top: 1rem;
     filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)); /* Shadow only on non-transparent parts */
@@ -62,6 +63,9 @@
 }
 
 @media (max-width: 768px) {
+    .landing-logo {
+        max-width: 300px;
+    }
     .landing-title {
         font-size: 2rem;
     }
