@@ -7,7 +7,7 @@
 
 .task-board-title {
   text-align: center;
-  color: #555;
+  color: var(--text-color-gray); 
   filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1)); 
 }
 

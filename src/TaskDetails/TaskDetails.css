@@ -1,7 +1,7 @@
 h1 {
   font-size: 2.5rem;
   font-weight: 600;
-  color: #333;
+  color: var(--text-color-gray);
   text-align: center;
   margin-bottom: 20px;
   text-transform: capitalize;
@@ -11,6 +11,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   background: rgba(249, 249, 249, 0.7);
+  color: var(--text-color-gray);
 }
 
 td {
@@ -26,12 +27,13 @@ input, select, textarea {
   background: rgba(249, 249, 249, 0);
   border-radius: 4px;
   box-sizing: border-box;
+  color: var(--text-color-gray);
 }
 
 .taskdetails-buttons {
   padding: 10px 20px;
   background-color: var(--granite-ridge);
-  color: white;
+  color: var(--white);
   border: none;
   cursor: pointer;
   margin-right: 10px;

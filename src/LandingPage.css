@@ -41,7 +41,7 @@
 
 .landing-button {
     padding: 0.8rem 1.5rem;
-    background-color: #3e4f1c;
+    background-color: var(--accent-color-green);
     color: #ffffff;
     text-decoration: none;
     border-radius: 4px;
@@ -52,7 +52,7 @@
 }
 
 .landing-button:hover {
-    background-color: #2e3b14;
+    background-color: var(--accent-color-green-dark);
     transform: translateY(-2px); /* Add a hover effect */
 }
 
