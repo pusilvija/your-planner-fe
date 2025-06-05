@@ -1,4 +1,7 @@
-/* Toolbar container */
+.toolbar-wrapper {
+  padding-right: 10px; /* Add spacing around the toolbar */
+}
+
 .toolbar {
   position: fixed;
   top: 0;
