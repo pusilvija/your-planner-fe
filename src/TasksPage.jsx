@@ -5,11 +5,25 @@ import { updateTask, deleteTask } from './services/taskService';
 
 function TasksPage() {
   const [tasks, setTasks] = useState([]);
+  const [filter, setFilter] = useState('');
+  const [filterField, setFilterField] = useState('name'); // State for selected filter field
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [editedField, setEditedField] = useState({});
-  const [sortConfig, setSortConfig] = useState({ field: null, direction: 'asc' }); // Sorting state
+  const [sortConfig, setSortConfig] = useState({ field: null, direction: 'asc' });
 
   useFetchTasks(setTasks);
+
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value.toLowerCase());
+  };
+
+  const handleFilterFieldChange = (e) => {
+    setFilterField(e.target.value); // Update the selected filter field
+  };
+
+  const filteredTasks = tasks.filter((task) =>
+    task[filterField]?.toLowerCase().includes(filter) // Filter by the selected field
+  );
 
   const handleFieldClick = (taskId, fieldName, currentValue) => {
     setEditingTaskId(taskId);
@@ -81,10 +95,33 @@ function TasksPage() {
   return (
     <div className="tasks-page">
       <h1>All Tasks</h1>
+
+      <div className="filter-container">
+      {/* Filter Field Dropdown */}
+      <select
+        value={filterField}
+        onChange={handleFilterFieldChange}
+        className="filter-field-select"
+      >
+        <option value="name">Name</option>
+        <option value="status">Status</option>
+        <option value="category">Category</option>
+      </select>
+
+      {/* Filter Input */}
+      <input
+        type="text"
+        placeholder={`Filter tasks by ${filterField}`}
+        value={filter}
+        onChange={handleFilterChange}
+        className="filter-input"
+      />
+    </div>
+
       <table className="tasks-table">
         <thead>
           <tr>
-          <th onClick={() => handleSort('name')}>
+            <th onClick={() => handleSort('name')}>
               Task Name {renderSortIcon('name')}
             </th>
             <th>Description</th>
@@ -98,7 +135,7 @@ function TasksPage() {
           </tr>
         </thead>
         <tbody>
-          {tasks.map((task, index) => (
+          {filteredTasks.map((task, index) => (
             <tr key={task.id || index}>
               <td>
                 {editingTaskId === task.id && editedField.fieldName === 'name' ? (

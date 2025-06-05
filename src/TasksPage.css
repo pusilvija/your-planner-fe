@@ -82,3 +82,30 @@
   width: 50px; /* Set the desired width for the last column */
   text-align: center; /* Optional: Center-align the content */
 }
+
+.filter-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Add spacing between dropdown and input */
+  margin-bottom: 20px; /* Add spacing below the filter section */
+  width: 95%; /* Match the width of the table */
+  margin-left: auto; /* Center the container horizontally */
+  margin-right: auto; /* Center the container horizontally */
+}
+
+.filter-field-select {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+.filter-input {
+  flex-grow: 1; /* Make the input take up remaining space */
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
