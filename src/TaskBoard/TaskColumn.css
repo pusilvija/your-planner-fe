@@ -27,7 +27,7 @@
 .add-task-btn {
   all: unset;
   background-color: transparent !important;
-  color: #556b2f;
+  color: var(--accent-color-green);
   border: none;
   border-radius: 5px;
   padding: 8px 16px;
@@ -43,7 +43,6 @@
 .add-task-btn::before {
   content: "+";
   font-size: 40px;
-  color: #556b2f;
   background-color: transparent;
   transition: transform 0.2s ease;
 }
