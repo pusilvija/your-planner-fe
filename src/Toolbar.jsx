@@ -23,7 +23,7 @@ function Toolbar() {
   const { handleLogout } = Logout();
 
   return (
-    <div className='toolbar-wrapper' >
+    // <div className='toolbar-wrapper' >
       <div className={`toolbar ${collapsed ? 'collapsed' : ''}`}>
       <button
         className="collapse-button"
@@ -57,7 +57,7 @@ function Toolbar() {
           </div>
       )}
       </div>
-    </div>
+    // </div>
   );
 }
 

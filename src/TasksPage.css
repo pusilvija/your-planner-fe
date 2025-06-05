@@ -1,5 +1,5 @@
 .tasks-table {
-    width: 100%;
+    width: 95%;
     border-collapse: collapse;
     margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.5);
@@ -73,4 +73,12 @@
 
 .tasks-page .delete-button:hover {
   transform: scale(1.2);
+}
+
+
+/* Make the last column smaller */
+.tasks-table th:last-child,
+.tasks-table td:last-child {
+  width: 50px; /* Set the desired width for the last column */
+  text-align: center; /* Optional: Center-align the content */
 }
