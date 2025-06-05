@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Toolbar() {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const navigate = useNavigate();
 
   const handleHome = () => {
