@@ -2,15 +2,16 @@
     width: 95%;
     border-collapse: collapse;
     margin: 0 auto;
+    margin-bottom: 20px;
     background-color: rgba(255, 255, 255, 0.5);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     table-layout: fixed;
   }
   
-  .tasks-table tr {
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 40px;
-  }
+.tasks-table tr {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 40px;
+}
 
 .tasks-table th,
 .tasks-table td {
@@ -54,7 +55,8 @@
   box-shadow: none;
 }
 
-.tasks-page .delete-button {
+.tasks-page .delete-button,
+.tasks-page .open-button {
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
@@ -62,6 +64,7 @@
   border: none;
   width: 20px;
   height: 20px;
+  margin-right: 5px;
   cursor: pointer;
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
@@ -71,7 +74,12 @@
   filter: invert(1);
 }
 
-.tasks-page .delete-button:hover {
+.tasks-page .open-button {
+  background-image: url(/public/images/arrow-open.png);
+}
+
+.tasks-page .delete-button:hover,
+.tasks-page .open-button:hover  {
   transform: scale(1.2);
 }
 

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import useFetchTasks from './hooks/useFetchTasks';
 import './TasksPage.css';
 import { updateTask, deleteTask } from './services/taskService';
 
 function TasksPage() {
+  const navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState('');
   const [filterField, setFilterField] = useState('name'); // State for selected filter field
@@ -24,6 +26,11 @@ function TasksPage() {
   const filteredTasks = tasks.filter((task) =>
     task[filterField]?.toLowerCase().includes(filter) // Filter by the selected field
   );
+
+  const handleAddTask = () => {
+    const status = "to do"; // Default status for new tasks
+    navigate(`/tasks/new?status=${status}`);
+  };
 
   const handleFieldClick = (taskId, fieldName, currentValue) => {
     setEditingTaskId(taskId);
@@ -66,6 +73,10 @@ function TasksPage() {
     } catch (error) {
       console.error('Failed to delete task:', error);
     }
+  };
+
+  const handleOpen = (taskId) => {
+    window.location.href = `/tasks/${taskId}`;
   };
 
   const handleSort = (field) => {
@@ -116,6 +127,7 @@ function TasksPage() {
         onChange={handleFilterChange}
         className="filter-input"
       />
+      <button className="add-task-btn" onClick={handleAddTask}></button>
     </div>
 
       <table className="tasks-table">
@@ -205,6 +217,7 @@ function TasksPage() {
               </td>
               <td>
                 <button className="delete-button" onClick={() => handleDelete(task.id)}></button>
+                <button className="open-button" onClick={() => handleOpen(task.id)}></button>
               </td>
             </tr>
           ))}
