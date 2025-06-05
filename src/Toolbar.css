@@ -5,51 +5,93 @@
   left: 0;
   width: 200px;
   height: 100vh;
-  background:  rgba(62, 79, 28, 0.5) !important; 
+  background: none !important;
   color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+  transition: all 0.7s ease;
 }
 
 .toolbar.collapsed {
-  width: 1px;
+  width: 100%;
+  height: 60px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: none;
 }
-
 
 /* Collapse button */
 .collapse-button {
-  position: absolute; 
-  top: 50%; 
-  right: -10px; 
-  transform: translateY(-50%);
-  background-color: rgba(62, 79, 28, 0.5) !important; 
-  color: white;
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  background: none;
   border: none;
-  border-radius: 50%;
   cursor: pointer;
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease;
 }
 
 .collapse-button:hover {
-  background-color: #1abc9c;
+  background: none !important;
 }
 
+.sandwich-icon {
+  width: 25px;
+  height: 2px;
+  background-color: var(--accent-color-green);
+  position: relative;
+  display: block;
+}
+
+.sandwich-icon::before,
+.sandwich-icon::after {
+  content: '';
+  width: 25px;
+  height: 2px;
+  background-color: var(--accent-color-green);
+  position: absolute;
+  left: 0;
+  transition: transform 0.3s ease;
+}
+
+.sandwich-icon::before {
+  top: -8px;
+}
+
+.sandwich-icon::after {
+  top: 8px;
+}
+
+/* Arrow icon */
+.arrow-icon {
+  font-size: 2.5rem;
+  color: var(--accent-color-green);
+  display: block;
+}
+
+/* Rotate the sandwich icon when collapsed */
+.toolbar.collapsed .sandwich-icon::before {
+  top: -8px;;
+}
+
+.toolbar.collapsed .sandwich-icon::after {
+  top: 8px;
+}
 
 /* Toolbar menu */
 .toolbar-menu {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 40px;
   width: 100%;
 }
 
@@ -60,7 +102,7 @@
 .toolbar-menu button {
   width: 100%;
   padding: 10px;
-  background-color: rgba(62, 79, 28); 
+  background-color: var(--accent-color-green);
   color: white;
   border: none;
   border-radius: 4px;
@@ -69,13 +111,30 @@
 }
 
 .toolbar-menu button:hover {
-  background-color: rgba(230, 230, 211, 1);
-  color: #556b2f;
+  background-color: var(--accent-color-low);
+  color: var(--background-color);
 }
 
-/* Weather section */
+/* Navbar menu when collapsed */
+.toolbar.collapsed .toolbar-menu {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: auto;
+}
+
+.toolbar.collapsed .toolbar-menu li {
+  margin: 0;
+}
+
+.toolbar.collapsed .toolbar-menu button {
+  padding: 5px 10px;
+  font-size: 0.9rem;
+}
+
 .weather-section {
-  margin-bottom: 200px;
+  margin-top: auto;
+  margin-bottom: 30px;
   width: 100%;
   text-align: center;
 }

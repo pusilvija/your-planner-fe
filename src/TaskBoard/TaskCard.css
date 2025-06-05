@@ -4,7 +4,7 @@
   align-items: center;
   color: #1a1a1a;
   text-decoration: none;
-  background-color: #d4d4b5;
+  background-color: var(--accent-color-green);
   padding: 15px 20px;
   margin-bottom: 15px;
   border-radius: 10px;
@@ -17,7 +17,7 @@
 }
 
 .task-card:hover {
-  background-color:  #e6e6d3;
+  background-color: var(--accent-color-low);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
   transform: translateY(-2px);
 }
@@ -30,7 +30,7 @@
 .task-card .task-name {
   font-size: 1.2em;
   font-weight: bold;
-  color: #556b2f;
+  color: var(--background-color);
 }
 
 .task-card .button-group {

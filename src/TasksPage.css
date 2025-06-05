@@ -7,6 +7,11 @@
     table-layout: fixed;
   }
   
+  .tasks-table tr {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 40px;
+  }
+
 .tasks-table th,
 .tasks-table td {
   padding: 10px;
@@ -17,8 +22,18 @@
   white-space: nowrap;
 }
 
+
+.tasks-table td {
+  padding: 10px;
+  text-align: left;
+  border: none !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .tasks-table th {
-  background-color: rgba(62, 79, 28, 0.8);
+  background-color: var(--accent-color-green);
   color: white;
   font-weight: bold;
 }
@@ -53,6 +68,7 @@
 
 .tasks-page .delete-button {
   background-image: url(/public/images/trash-icon.png);
+  filter: invert(1);
 }
 
 .tasks-page .delete-button:hover {

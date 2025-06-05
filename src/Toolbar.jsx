@@ -10,7 +10,7 @@ function Toolbar() {
   const navigate = useNavigate();
 
   const handleHome = () => {
-    // navigate('/');
+    navigate('/');
   }
 
   const handleTaskBoard = () => {
@@ -24,17 +24,16 @@ function Toolbar() {
 
   return (
     <div className={`toolbar ${collapsed ? 'collapsed' : ''}`}>
-      <button
-        className="collapse-button"
-        onClick={() => setCollapsed(!collapsed)}
-      >
-        {collapsed ? '>' : '<'}
-      </button>
-      {!collapsed && (
-        <div className="weather-section">
-          <WeatherApp />
-        </div>
+    <button
+      className="collapse-button"
+      onClick={() => setCollapsed(!collapsed)}
+    >
+      {collapsed ? (
+        <span className="sandwich-icon"></span> // Show sandwich icon when collapsed
+      ) : (
+        <span className="arrow-icon">&laquo;</span> // Show left arrow when expanded
       )}
+    </button>
       {!collapsed && (
         <ul className="toolbar-menu">
           <li>
@@ -51,6 +50,11 @@ function Toolbar() {
           </li>
         </ul>
       )}
+      {!collapsed && (
+        <div className="weather-section">
+          <WeatherApp />
+        </div>
+    )}
     </div>
   );
 }

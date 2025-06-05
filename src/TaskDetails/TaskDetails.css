@@ -31,7 +31,7 @@ input, select, textarea {
 
 .taskdetails-buttons {
   padding: 10px 20px;
-  background-color: #6b8e23;
+  background-color: var(--granite-ridge);
   color: white;
   border: none;
   cursor: pointer;
@@ -41,5 +41,5 @@ input, select, textarea {
 }
 
 button:hover {
-  background-color: #556b2f;
+  background-color: var(--accent-color-pink);
 }
