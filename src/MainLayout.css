@@ -4,12 +4,6 @@
   display: flex;
   height: 100%;
   min-height: 100vh;
-  /* background-color: var(--background-color2); */
-  /* background-color: #e4e6db; */
-  background-image: url('/public/images/bg.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .main-layout::before {
@@ -19,7 +13,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white overlay */
   z-index: 0; /* Ensure it is behind the content */
 }
 
@@ -44,10 +37,8 @@
 .main-content {
   flex: 1;
   margin-left: 240px;
-  /* padding: 20px; */
   height: 100%;
   overflow: hidden;
-  font-family: Arial, sans-serif;
 }
 
 .toolbar.collapsed + .main-content {

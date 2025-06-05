@@ -2,9 +2,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #1a1a1a;
+  color: var(--card-text);
   text-decoration: none;
   background-color: var(--accent-color-green);
+  color: var(--background-color);
   padding: 15px 20px;
   margin-bottom: 15px;
   border-radius: 10px;
@@ -17,7 +18,7 @@
 }
 
 .task-card:hover {
-  background-color: var(--accent-color-low);
+  background-color: var(--background-color);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
   transform: translateY(-2px);
 }

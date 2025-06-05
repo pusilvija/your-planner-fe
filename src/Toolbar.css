@@ -1,4 +1,6 @@
-/* Toolbar container */
+.toolbar-wrapper {
+  margin: 20px;
+}
 .toolbar {
   position: fixed;
   top: 0;
@@ -13,6 +15,12 @@
   padding: 20px;
   z-index: 1000;
   transition: all 0.7s ease;
+  overflow-y: auto;
+  scrollbar-width: none; 
+}
+
+.toolbar::-webkit-scrollbar {
+  display: none; /* Hide scrollbar in WebKit-based browsers */
 }
 
 .toolbar.collapsed {
@@ -134,7 +142,7 @@
 
 .weather-section {
   margin-top: auto;
-  margin-bottom: 30px;
+  margin-bottom: 80px;
   width: 100%;
   text-align: center;
 }

@@ -1,5 +1,4 @@
 h1 {
-  font-family: 'Poppins', sans-serif;
   font-size: 2.5rem;
   font-weight: 600;
   color: #333;
@@ -9,7 +8,7 @@ h1 {
 }
 
 table {
-  width: 80%;
+  width: 100%;
   border-collapse: collapse;
   background: rgba(249, 249, 249, 0.7);
 }

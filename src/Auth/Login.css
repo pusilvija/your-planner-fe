@@ -1,20 +1,12 @@
-body {
-    background-image: url('../../public/images/bg.jpg'); /* Correct path */
-    background-size: cover; /* Ensure the image covers the entire screen */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-}
-
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: rgba(255, 255, 255, 0.5); 
 }
 
 .login-form {
-    background: #ffffff;
+    background: var(--white);
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -26,11 +18,11 @@ body {
 .login-title {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #3e4f1c; /* Primary green color */
+    color: var(--accent-color-green);
 }
 
 .login-error {
-    color: #ff4d4d; /* Red for error messages */
+    color: #ff4d4d;
     font-size: 0.9rem;
     margin-bottom: 1rem;
 }
@@ -39,25 +31,25 @@ body {
     width: 100%;
     padding: 0.8rem;
     margin-bottom: 1rem;
-    border: 1px solid #3e4f1c; /* Primary green color for border */
+    border: 1px solid var(--accent-color-green);
     border-radius: 4px;
     font-size: 1rem;
     box-sizing: border-box;
-    background-color: #f8f9f5; /* Light greenish background */
-    color: #3e4f1c; /* Primary green color for text */
+    background-color: #f8f9f5;
+    color: var(--accent-color-green);
 }
 
 .login-input:focus {
-    border-color: #3e4f1c; /* Primary green color for focus */
-    outline: none; /* Remove the default outline */
-    box-shadow: 0 0 4px rgba(62, 79, 28, 0.5); /* Greenish shadow */
-    background-color: #ffffff; /* Ensure the background remains white */
+    border-color: var(--accent-color-green);
+    outline: none;
+    box-shadow: 0 0 4px rgba(62, 79, 28, 0.5);
+    background-color: #ffffff;
 }
 
 .login-button {
     width: 100%;
     padding: 0.8rem;
-    background-color: #3e4f1c; /* Primary green color */
+    background-color: var(--accent-color-green);
     color: #ffffff;
     border: none;
     border-radius: 4px;
@@ -67,43 +59,43 @@ body {
 }
 
 .login-button:hover {
-    background-color: #2e3b14; /* Darker shade of primary green */
+    background-color: var(--accent-color-green-dark);
 }
 
 .login-button:active {
-    background-color: #24300f; /* Even darker shade for active state */
+    background-color: var(--accent-color-green-dark);
 }
 
 /* Remove autofill background color */
 .login-input:-webkit-autofill {
-    background-color: #f8f9f5 !important; /* Light greenish background */
-    -webkit-box-shadow: 0 0 0px 1000px #f8f9f5 inset !important; /* Remove the blueish shadow */
-    box-shadow: 0 0 0px 1000px #f8f9f5 inset !important; /* Remove the blueish shadow */
-    color: #3e4f1c !important; /* Primary green color for text */
+    background-color: #f8f9f5 !important;
+    -webkit-box-shadow: 0 0 0px 1000px #f8f9f5 inset !important; 
+    box-shadow: 0 0 0px 1000px #f8f9f5 inset !important;
+    color: var(--accent-color-green) !important;
 }
 
 .login-input:-webkit-autofill:focus {
-    background-color: #ffffff !important; /* Ensure the background remains white */
-    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important; /* Remove the blueish shadow */
-    box-shadow: 0 0 0px 1000px #ffffff inset !important; /* Remove the blueish shadow */
-    border-color: #3e4f1c !important; /* Primary green color for focus */
-    color: #3e4f1c !important; /* Primary green color for text */
+    background-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+    box-shadow: 0 0 0px 1000px #ffffff inset !important;
+    border-color: var(--accent-color-green)  !important;
+    color: var(--accent-color-green) !important;
 }
 
 .login-register-link {
     margin-top: 1rem;
     font-size: 0.9rem;
-    color: #3e4f1c; /* Primary green color */
+    color: var(--accent-color-green);
     text-align: center;
 }
 
 .login-register-link a {
-    color: #3e4f1c; /* Primary green color for the link */
-    text-decoration: none; /* Remove underline */
+    color: var(--accent-color-green);
+    text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease;
 }
 
 .login-register-link a:hover {
-    color: #2e3b14; /* Darker shade of green on hover */
+    color: var(--accent-color-green-dark);
 }

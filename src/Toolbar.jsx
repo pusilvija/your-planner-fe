@@ -23,38 +23,40 @@ function Toolbar() {
   const { handleLogout } = Logout();
 
   return (
-    <div className={`toolbar ${collapsed ? 'collapsed' : ''}`}>
-    <button
-      className="collapse-button"
-      onClick={() => setCollapsed(!collapsed)}
-    >
-      {collapsed ? (
-        <span className="sandwich-icon"></span> // Show sandwich icon when collapsed
-      ) : (
-        <span className="arrow-icon">&laquo;</span> // Show left arrow when expanded
+    <div className='toolbar-wrapper'>
+      <div className={`toolbar ${collapsed ? 'collapsed' : ''}`}>
+      <button
+        className="collapse-button"
+        onClick={() => setCollapsed(!collapsed)}
+      >
+        {collapsed ? (
+          <span className="sandwich-icon"></span> // Show sandwich icon when collapsed
+        ) : (
+          <span className="arrow-icon">&laquo;</span> // Show left arrow when expanded
+        )}
+      </button>
+        {!collapsed && (
+          <ul className="toolbar-menu">
+            <li>
+              <button onClick={handleHome}>Home</button>
+            </li>
+            <li>
+              <button onClick={handleTaskBoard}>Task board</button>
+            </li>
+            <li>
+              <button onClick={handleTasks}>Tasks</button>
+            </li>
+            <li>
+            <button onClick={handleLogout}>Logout</button>
+            </li>
+          </ul>
+        )}
+        {!collapsed && (
+          <div className="weather-section">
+            <WeatherApp />
+          </div>
       )}
-    </button>
-      {!collapsed && (
-        <ul className="toolbar-menu">
-          <li>
-            <button onClick={handleHome}>Home</button>
-          </li>
-          <li>
-            <button onClick={handleTaskBoard}>Task board</button>
-          </li>
-          <li>
-            <button onClick={handleTasks}>Tasks</button>
-          </li>
-          <li>
-          <button onClick={handleLogout}>Logout</button>
-          </li>
-        </ul>
-      )}
-      {!collapsed && (
-        <div className="weather-section">
-          <WeatherApp />
-        </div>
-    )}
+      </div>
     </div>
   );
 }
