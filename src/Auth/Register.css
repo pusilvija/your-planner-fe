@@ -1,20 +1,12 @@
-body {
-    background-image: url('../../public/images/bg.jpg');
-    background-size: cover; 
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
 .register-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: rgba(255, 255, 255, 0.5); 
 }
 
 .register-form {
-    background: #ffffff;
+    background: var(--white);
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -26,7 +18,7 @@ body {
 .register-title {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #3e4f1c;
+    color: var(--accent-color-green);
 }
 
 .register-error {
@@ -36,7 +28,7 @@ body {
 }
 
 .register-success {
-    color: #28a745;
+    color: var(--accent-color-green);
     font-size: 0.9rem;
     margin-bottom: 1rem;
 }
@@ -45,25 +37,25 @@ body {
     width: 100%;
     padding: 0.8rem;
     margin-bottom: 1rem;
-    border: 1px solid #3e4f1c;
+    border: 1px solid var(--accent-color-green);
     border-radius: 4px;
     font-size: 1rem;
     box-sizing: border-box;
     background-color: #f8f9f5;
-    color: #3e4f1c;
+    color: var(--accent-color-green);
 }
 
 .register-input:focus {
-    border-color: #3e4f1c;
+    border-color: var(--accent-color-green);
     outline: none;
-    box-shadow: 0 0 4px rgba(62, 79, 28, 0.5); /* Greenish shadow */
-    background-color: #ffffff; /* Ensure the background remains white */
+    box-shadow: 0 0 4px rgba(62, 79, 28, 0.5);
+    background-color: var(--white);
 }
 
 .register-button {
     width: 100%;
     padding: 0.8rem;
-    background-color: #3e4f1c; /* Primary green color */
+    background-color: var(--accent-color-green);
     color: #ffffff;
     border: none;
     border-radius: 4px;
@@ -73,25 +65,25 @@ body {
 }
 
 .register-button:hover {
-    background-color: #2e3b14; /* Darker shade of primary green */
+    background-color: var(--accent-color-green-dark);
 }
 
 .register-button:active {
-    background-color: #24300f; /* Even darker shade for active state */
+    background-color: var(--accent-color-green-dark);
 }
 
 /* Remove autofill background color */
 .register-input:-webkit-autofill {
-    background-color: #f8f9f5 !important; /* Light greenish background */
-    -webkit-box-shadow: 0 0 0px 1000px #f8f9f5 inset !important; /* Remove the blueish shadow */
-    box-shadow: 0 0 0px 1000px #f8f9f5 inset !important; /* Remove the blueish shadow */
-    color: #3e4f1c !important; /* Primary green color for text */
+    background-color: #f8f9f5 !important;
+    -webkit-box-shadow: 0 0 0px 1000px #f8f9f5 inset !important;
+    box-shadow: 0 0 0px 1000px #f8f9f5 inset !important;
+    color: var(--accent-color-green) !important;
 }
 
 .register-input:-webkit-autofill:focus {
-    background-color: #ffffff !important; /* Ensure the background remains white */
-    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important; /* Remove the blueish shadow */
-    box-shadow: 0 0 0px 1000px #ffffff inset !important; /* Remove the blueish shadow */
-    border-color: #3e4f1c !important; /* Primary green color for focus */
-    color: #3e4f1c !important; /* Primary green color for text */
+    background-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+    box-shadow: 0 0 0px 1000px #ffffff inset !important;
+    border-color: var(--accent-color-green) !important;
+    color: var(--accent-color-green) !important;
 }

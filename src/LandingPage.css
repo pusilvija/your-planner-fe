@@ -1,19 +1,9 @@
-body {
-    background-image: url('/public/images/bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
-
 .landing-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: rgba(255, 255, 255, 0.5); 
     text-align: center;
     padding: 0 20px; /* Add padding for smaller screens */
     box-sizing: border-box;
