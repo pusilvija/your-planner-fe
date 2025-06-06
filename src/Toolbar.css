@@ -16,6 +16,11 @@
   scrollbar-width: none; 
 }
 
+.toolbar:hover {
+  width: 200px;
+}
+
+
 .toolbar::-webkit-scrollbar {
   display: none; /* Hide scrollbar in WebKit-based browsers */
 }

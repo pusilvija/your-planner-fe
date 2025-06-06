@@ -65,6 +65,12 @@ function TasksPage() {
     }
   };
 
+  const confirmAndDelete = (taskId) => {
+    if (window.confirm('Are you sure you want to delete this task?')) {
+      handleDelete(taskId);
+    }
+  };
+
   const handleDelete = async (taskId) => {
     try {
       await deleteTask(taskId);
@@ -216,7 +222,7 @@ function TasksPage() {
                 )}
               </td>
               <td>
-                <button className="delete-button" onClick={() => handleDelete(task.id)}></button>
+                <button className="delete-button" onClick={() => confirmAndDelete(task.id)}></button>
                 <button className="open-button" onClick={() => handleOpen(task.id)}></button>
               </td>
             </tr>
