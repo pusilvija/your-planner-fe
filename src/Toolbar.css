@@ -12,17 +12,11 @@
   padding: 20px;
   z-index: 1000;
   transition: all 0.7s ease;
-  overflow-y: auto;
-  scrollbar-width: none; 
+  overflow: hidden;
 }
 
 .toolbar:hover {
   width: 200px;
-}
-
-
-.toolbar::-webkit-scrollbar {
-  display: none; /* Hide scrollbar in WebKit-based browsers */
 }
 
 .toolbar.collapsed {
