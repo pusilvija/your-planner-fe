@@ -111,7 +111,8 @@ function TaskDetails() {
         await updateTask(taskId, taskData);
         console.log('Task updated successfully.');
       }
-      navigate('/taskboard');
+      setUnsavedChanges(false);
+      navigate(-1);
     } catch (error) {
       console.error('Error saving task:', error);
       setError('Failed to save task. Please try again.');
@@ -147,11 +148,11 @@ function TaskDetails() {
           <tr>
             <td>Description:</td>
             <td>
-              <textarea
-                name="description"
-                value={taskData.description || ''}
-                onChange={handleChange}
-              />
+            <textarea
+              name="description"
+              value={taskData.description || ''}
+              onChange={handleChange}
+            />
             </td>
           </tr>
           <tr>
@@ -168,6 +169,18 @@ function TaskDetails() {
               </select>
             </td>
           </tr>
+          <tr>
+            <td>Category:</td>
+            <td>
+              <input
+                name="category"
+                value={taskData.category || ''}
+                onChange={handleChange}
+              >
+              </input>
+            </td>
+          </tr>
+          
         </tbody>
       </table>
       <button className="taskdetails-buttons" id="save-button" onClick={handleSave}>

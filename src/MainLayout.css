@@ -39,6 +39,7 @@
   margin-left: 240px;
   height: 100%;
   overflow: hidden;
+  padding: 20px;
 }
 
 .toolbar.collapsed + .main-content {

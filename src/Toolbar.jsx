@@ -4,18 +4,19 @@ import WeatherApp from './WeatherApp/WeatherApp.js';
 import Logout from './Auth/Logout.js';
 import { useNavigate } from 'react-router-dom';
 
-
 function Toolbar() {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
+  const [hovered, setHovered] = useState(false);
   const navigate = useNavigate();
 
   const handleHome = () => {
     navigate('/');
-  }
+  };
 
   const handleTaskBoard = () => {
     navigate('/taskboard');
   };
+
   const handleTasks = () => {
     navigate('/tasks');
   };
@@ -23,39 +24,37 @@ function Toolbar() {
   const { handleLogout } = Logout();
 
   return (
-    <div className='toolbar-wrapper'>
-      <div className={`toolbar ${collapsed ? 'collapsed' : ''}`}>
+    <div
+      className={`toolbar ${collapsed && !hovered ? 'collapsed' : ''}`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       <button
         className="collapse-button"
         onClick={() => setCollapsed(!collapsed)}
       >
         {collapsed ? (
-          <span className="sandwich-icon"></span> // Show sandwich icon when collapsed
+          <span className="sandwich-icon"></span>
         ) : (
-          <span className="arrow-icon">&laquo;</span> // Show left arrow when expanded
+          <span className="arrow-icon">&laquo;</span>
         )}
       </button>
-        {!collapsed && (
-          <ul className="toolbar-menu">
-            <li>
-              <button onClick={handleHome}>Home</button>
-            </li>
-            <li>
-              <button onClick={handleTaskBoard}>Task board</button>
-            </li>
-            <li>
-              <button onClick={handleTasks}>Tasks</button>
-            </li>
-            <li>
-            <button onClick={handleLogout}>Logout</button>
-            </li>
-          </ul>
-        )}
-        {!collapsed && (
-          <div className="weather-section">
-            <WeatherApp />
-          </div>
-      )}
+      <ul className="toolbar-menu">
+        <li>
+          <button onClick={handleHome}>Home</button>
+        </li>
+        <li>
+          <button onClick={handleTaskBoard}>Task Board</button>
+        </li>
+        <li>
+          <button onClick={handleTasks}>All Tasks</button>
+        </li>
+        <li>
+          <button onClick={handleLogout}>Logout</button>
+        </li>
+      </ul>
+      <div className="weather-section">
+        <WeatherApp />
       </div>
     </div>
   );

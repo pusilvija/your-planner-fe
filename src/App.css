@@ -3,16 +3,18 @@
   /* --accent-color: #687D31; */
   /* --accent-color2: #406768; */
   --accent-color-low: #D4CBC7;
-  --accent-color-green: #80864F;
+  --accent-color-green: hwb(68 31% 47%);
   --accent-color-green-dark: #6E733F;
+  --accent-color-green-light: #9CA06B;
   --accent-color-pink: #BA908B;
   /* --moonstone-blue: #6FA9BB; */
   --granite-ridge: #8E98A1;
   --text-color: #111827;
   --text-color-gray: #555;
+  --text-color-light: #F9FAFB;
   --white: #FFFFFF;
   --black: #000000;
-  /* --card-text: #EFDCC3; */
   --background-color2: #F9FAFB;
   --background-color: #F5EBE3;
+  --box-background: #ffffff80;
 }

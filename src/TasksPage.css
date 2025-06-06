@@ -1,8 +1,8 @@
 .tasks-page h1 {
-  color: #555;
+  color: var(--text-color-gray);
 }
 .tasks-table {
-    width: 95%;
+    width: 100%;
     border-collapse: collapse;
     margin: 0 auto;
     margin-bottom: 20px;
@@ -74,11 +74,12 @@
 
 .tasks-page .delete-button {
   background-image: url(/public/images/trash-icon.png);
-  filter: invert(1);
+  filter: invert(20%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(50%) contrast(100%);
 }
 
 .tasks-page .open-button {
   background-image: url(/public/images/arrow-open.png);
+  filter: invert(33%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(150%) contrast(100%);
 }
 
 .tasks-page .delete-button:hover,
@@ -90,7 +91,7 @@
 /* Make the last column smaller */
 .tasks-table th:last-child,
 .tasks-table td:last-child {
-  width: 50px; /* Set the desired width for the last column */
+  width: 80px; /* Set the desired width for the last column */
   text-align: center; /* Optional: Center-align the content */
 }
 
@@ -99,7 +100,7 @@
   align-items: center;
   gap: 10px; /* Add spacing between dropdown and input */
   margin-bottom: 20px; /* Add spacing below the filter section */
-  width: 95%; /* Match the width of the table */
+  width: 100%; /* Match the width of the table */
   margin-left: auto; /* Center the container horizontally */
   margin-right: auto; /* Center the container horizontally */
 }

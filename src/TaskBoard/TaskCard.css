@@ -18,7 +18,7 @@
 }
 
 .task-card:hover {
-  background-color: var(--background-color);
+  background-color: var(--accent-color-green-light);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
   transform: translateY(-2px);
 }
@@ -31,7 +31,7 @@
 .task-card .task-name {
   font-size: 1.2em;
   font-weight: bold;
-  color: var(--background-color);
+  color: var(--text-color-light);
 }
 
 .task-card .button-group {
@@ -72,7 +72,7 @@
   background-color: inherit;
   font-size: 1.2em;
   font-weight: bold;
-  color: #556b2f;
+  color: var(--text-color-light);
   border: none;
   border-radius: 5px;
   padding: 5px;
