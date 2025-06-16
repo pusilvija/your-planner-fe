@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { Toolbar } from '../components';
+import Toolbar from './Toolbar.jsx';
 import './MainLayout.css';
 
 function MainLayout() {
