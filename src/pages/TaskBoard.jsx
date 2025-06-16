@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import {
   DndContext,
-  rectIntersection,
   closestCorners,
   KeyboardSensor,
   PointerSensor,
@@ -17,15 +16,10 @@ import {
   sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable';
 
-import TaskColumn from '../components/TaskColumn.jsx';
-import TaskCard from '../components/TaskCard.jsx';
-
-import useTaskDragHandlers from '../hooks/useTaskDragHandlers.js';
-import useFetchTaskBoard from '../hooks/useFetchTaskBoard.js';
-import { updateTaskName } from '../services/taskService.js';
-import { syncTasksToBackend } from '../services/taskService.js';
+import { TaskColumn, TaskCard } from '../components';
+import { useTaskDragHandlers, useFetchTaskBoard } from '../hooks';
+import { updateTaskName, syncTasksToBackend } from '../services';
 import { STATUSES } from '../utils/constants.js';
-
 import './TaskBoard.css';
 
 

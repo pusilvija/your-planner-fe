@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Toolbar.css';
-import WeatherApp from './WeatherApp.js';
-import useLogout from '../hooks/useLogout.js';
+import { WeatherApp } from './';
+import { useLogout } from '../hooks';
 import { useNavigate } from 'react-router-dom';
 
 function Toolbar() {

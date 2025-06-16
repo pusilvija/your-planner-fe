@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
-import useFetchTasks from '../hooks/useFetchTasks';
+import { useFetchTasks } from '../hooks';
 import './TasksPage.css';
-import { updateTask, deleteTask } from '../services/taskService';
+import { updateTask, deleteTask } from '../services';
 
 function TasksPage() {
   const navigate = useNavigate();

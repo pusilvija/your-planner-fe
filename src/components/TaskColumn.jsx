@@ -1,8 +1,8 @@
 import { useDroppable } from '@dnd-kit/core';
 import { useNavigate } from 'react-router-dom';
 
-import SortableTaskCard from './SortableTaskCard.jsx';
-import { deleteTask } from '../services/taskService.js';
+import { SortableTaskCard } from './';
+import { deleteTask } from '../services';
 
 import './TaskColumn.css';
 

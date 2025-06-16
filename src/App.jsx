@@ -1,14 +1,9 @@
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-import TaskBoard from './pages/TaskBoard.jsx';
-import TaskDetails from './pages/TaskDetails.jsx';
-import Login from './pages/Login.js';
-import Register from './pages/Register.js';
-import ProtectedRoute from './components/routing/ProtectedRoute.js';
-import MainLayout from './components/MainLayout.jsx';
-import TasksPage from './pages/TasksPage.jsx';
-import LandingPage from './pages/LandingPage.js';
+import { TaskBoard, TaskDetails, Login, Register, TasksPage, LandingPage } from './pages';
+import { ProtectedRoute, MainLayout } from './components';
+
 
 function App() {
   return (

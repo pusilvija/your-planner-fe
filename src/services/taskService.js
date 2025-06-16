@@ -1,4 +1,4 @@
-import axiosInstance from './axiosConfig.js';
+import { axiosInstance } from './';
 
 
 export const updateTaskName = async (taskId, newName, setTasks) => {

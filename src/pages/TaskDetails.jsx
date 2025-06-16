@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
-import { fetchTaskDetails, createTask, updateTask, deleteTask } from '../services/taskService';
+import { fetchTaskDetails, createTask, updateTask, deleteTask } from '../services';
 
 import './TaskDetails.css';
 
