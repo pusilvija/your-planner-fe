@@ -134,7 +134,7 @@ function TasksPage() {
         className="filter-input"
       />
       <button className="add-task-btn" onClick={handleAddTask}></button>
-    </div>
+      </div>
 
       <table className="tasks-table">
         <thead>

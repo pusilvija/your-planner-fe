@@ -8,7 +8,7 @@ import './Register.css';
 
 const Register = () => {
     const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
+    // const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
@@ -21,7 +21,7 @@ const Register = () => {
 
         axiosInstance.post('/users/register/', {
             username,
-            email, // TODO: Make email useful
+            // email, // TODO: Make email useful
             password,
         })
         .then(response => {
@@ -50,13 +50,13 @@ const Register = () => {
                     onChange={(e) => setUsername(e.target.value)}
                     className="register-input"
                 />
-                <input
+                {/* <input
                     type="email"
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="register-input"
-                />
+                /> */}
                 <input
                     type="password"
                     placeholder="Password"
