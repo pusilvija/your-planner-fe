@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { fetchTaskBoard } from '../services/axiosConfig.js';
 import { STATUSES } from '../utils/constants.js';
 
-
 const useFetchTaskBoard = (setTasks) => {
   useEffect(() => {
     const loadTasks = async () => {

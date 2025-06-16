@@ -1,16 +1,22 @@
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-import { TaskBoard, TaskDetails, Login, Register, TasksPage, LandingPage } from './pages';
+import {
+  TaskBoard,
+  TaskDetails,
+  Login,
+  Register,
+  TasksPage,
+  LandingPage,
+} from './pages';
 import { ProtectedRoute, MainLayout } from './components';
-
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         {/* Public Routes */}
-        <Route path="/" element={<LandingPage />} /> 
+        <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 

@@ -22,7 +22,6 @@ import { updateTaskName, syncTasksToBackend } from '../services';
 import { STATUSES } from '../utils/constants.js';
 import './TaskBoard.css';
 
-
 function TaskBoard() {
   const navigate = useNavigate();
 
@@ -33,7 +32,7 @@ function TaskBoard() {
     }, {})
   );
   const [activeTask, setActiveTask] = useState(null);
-  const [draggingTaskId, setDraggingTaskId] = useState(null);
+  const [, setDraggingTaskId] = useState(null);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 10 } }),
@@ -42,13 +41,14 @@ function TaskBoard() {
 
   useFetchTaskBoard(setTasks);
 
-  const { handleDragStart, handleDragOver, handleDragEnd } = useTaskDragHandlers(
-    tasks,
-    setTasks,
-    setActiveTask,
-    setDraggingTaskId,
-    (t) => syncTasksToBackend(t)
-  );
+  const { handleDragStart, handleDragOver, handleDragEnd } =
+    useTaskDragHandlers(
+      tasks,
+      setTasks,
+      setActiveTask,
+      setDraggingTaskId,
+      (t) => syncTasksToBackend(t)
+    );
 
   const handleClick = (taskId) => {
     navigate(`/tasks/${taskId}`);

@@ -10,7 +10,7 @@ function Toolbar() {
 
   const handleHome = () => {
     navigate('/');
-  }
+  };
 
   const handleTaskBoard = () => {
     navigate('/taskboard');
@@ -22,7 +22,7 @@ function Toolbar() {
   const { handleLogout } = useLogout();
 
   return (
-      <div className={`toolbar ${collapsed ? 'collapsed' : ''}`}>
+    <div className={`toolbar ${collapsed ? 'collapsed' : ''}`}>
       <button
         className="collapse-button"
         onClick={() => setCollapsed(!collapsed)}
@@ -33,28 +33,28 @@ function Toolbar() {
           <span className="arrow-icon">&laquo;</span>
         )}
       </button>
-        {!collapsed && (
-          <ul className="toolbar-menu">
-            <li>
-              <button onClick={handleHome}>Home</button>
-            </li>
-            <li>
-              <button onClick={handleTaskBoard}>Task Board</button>
-            </li>
-            <li>
-              <button onClick={handleTasks}>All Tasks</button>
-            </li>
-            <li>
+      {!collapsed && (
+        <ul className="toolbar-menu">
+          <li>
+            <button onClick={handleHome}>Home</button>
+          </li>
+          <li>
+            <button onClick={handleTaskBoard}>Task Board</button>
+          </li>
+          <li>
+            <button onClick={handleTasks}>All Tasks</button>
+          </li>
+          <li>
             <button onClick={handleLogout}>Logout</button>
-            </li>
-          </ul>
-        )}
-        {!collapsed && (
-          <div className="weather-section">
-            <WeatherApp />
-          </div>
+          </li>
+        </ul>
       )}
-      </div>
+      {!collapsed && (
+        <div className="weather-section">
+          <WeatherApp />
+        </div>
+      )}
+    </div>
   );
 }
 

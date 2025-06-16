@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 
 import { fetchTasks } from '../services/axiosConfig.js';
 
-
 const useFetchTasks = (setTasks) => {
   useEffect(() => {
     const loadTasks = async () => {

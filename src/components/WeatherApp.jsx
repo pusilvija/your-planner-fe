@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import './WeatherApp.css';
-
 
 const WeatherApp = () => {
   const [weather, setWeather] = useState(null);
@@ -18,7 +17,8 @@ const WeatherApp = () => {
       setWeather(response.data);
       setError(null);
     } catch (err) {
-      setError("Unable to fetch weather data. Please try again.");
+      console.error('Error fetching weather data:', err);
+      setError('Unable to fetch weather data. Please try again.');
       setWeather(null);
     } finally {
       setLoading(false);
@@ -34,6 +34,7 @@ const WeatherApp = () => {
       setWeather(response.data);
       setError(null);
     } catch (err) {
+      console.error(`Error fetching weather data for ${city}:`, err);
       setError(`Unable to fetch weather data for ${city}.`);
       setWeather(null);
     } finally {
@@ -49,13 +50,16 @@ const WeatherApp = () => {
           fetchWeather(latitude, longitude);
         },
         (err) => {
-          setError("Unable to retrieve your location. Defaulting to Vilnius.");
-          fetchWeatherByCity("Vilnius");
+          console.error('Error retrieving location:', err);
+          setError('Unable to retrieve your location. Defaulting to Vilnius.');
+          fetchWeatherByCity('Vilnius');
         }
       );
     } else {
-      setError("Geolocation is not supported by your browser. Defaulting to Vilnius.");
-      fetchWeatherByCity("Vilnius");
+      setError(
+        'Geolocation is not supported by your browser. Defaulting to Vilnius.'
+      );
+      fetchWeatherByCity('Vilnius');
     }
   };
 
@@ -77,13 +81,25 @@ const WeatherApp = () => {
     <div className="weather-container">
       <div className="weather-header">
         <h1 className="weather-title">{weather.name}</h1>
-        <img src={weatherIcon} alt={weather.weather[0].description} className="weather-icon" />
+        <img
+          src={weatherIcon}
+          alt={weather.weather[0].description}
+          className="weather-icon"
+        />
       </div>
       <div className="weather-details">
-        <p><strong>Temperature:</strong> {weather.main.temp}°C</p>
-        <p><strong>Condition:</strong> {weather.weather[0].description}</p>
-        <p><strong>Humidity:</strong> {weather.main.humidity}%</p>
-        <p><strong>Wind Speed:</strong> {weather.wind.speed} m/s</p>
+        <p>
+          <strong>Temperature:</strong> {weather.main.temp}°C
+        </p>
+        <p>
+          <strong>Condition:</strong> {weather.weather[0].description}
+        </p>
+        <p>
+          <strong>Humidity:</strong> {weather.main.humidity}%
+        </p>
+        <p>
+          <strong>Wind Speed:</strong> {weather.wind.speed} m/s
+        </p>
       </div>
     </div>
   );

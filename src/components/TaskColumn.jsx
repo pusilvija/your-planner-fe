@@ -6,7 +6,6 @@ import { deleteTask } from '../services';
 
 import './TaskColumn.css';
 
-
 function TaskColumn({ status, tasks, handleClick, setTasks, updateTaskName }) {
   const { setNodeRef } = useDroppable({ id: status });
   const navigate = useNavigate();
@@ -19,7 +18,9 @@ function TaskColumn({ status, tasks, handleClick, setTasks, updateTaskName }) {
     try {
       setTasks((prevTasks) => {
         const updatedTasks = { ...prevTasks };
-        updatedTasks[status] = updatedTasks[status].filter((task) => task.id !== taskId);
+        updatedTasks[status] = updatedTasks[status].filter(
+          (task) => task.id !== taskId
+        );
         return updatedTasks;
       });
 
@@ -43,7 +44,9 @@ function TaskColumn({ status, tasks, handleClick, setTasks, updateTaskName }) {
           task={task}
           onClick={() => handleClick(task.id)}
           handleDelete={handleDelete}
-          handleUpdate={(taskId, newName) => updateTaskName(taskId, newName, setTasks)}
+          handleUpdate={(taskId, newName) =>
+            updateTaskName(taskId, newName, setTasks)
+          }
         />
       ))}
     </div>

@@ -21,3 +21,10 @@ yarn-debug.log*
 yarn-error.log*
 
 notes.txt
+
+.vscode
+
+
+.eslintrc.json
+eslint.config.mjs
+.prettierrc

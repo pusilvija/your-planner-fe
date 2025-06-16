@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import './TaskCard.css';
 
-
 function TaskCard({ task, isDragging, handleDelete, handleUpdate }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedName, setEditedName] = useState(task.name);
