@@ -4,19 +4,19 @@ import axios from 'axios';
 // Determine the base URL based on the environment
 const baseURL =
   process.env.NODE_ENV === 'production'
-    ? `${process.env.REACT_APP_RAILWAY_PUBLIC_DOMAIN}/api` // production URL
-    : '/api'; // local development URL
+    ? `${process.env.REACT_APP_RAILWAY_PUBLIC_DOMAIN}/api`
+    : '/api';
 
 // Create an Axios instance
 const axiosInstance = axios.create({
-  baseURL, // Dynamically set the base URL
+  baseURL,
 });
 
 
 // Add a request interceptor to attach the token
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+    const token = localStorage.getItem('token');
     if (token) {
       // Check the endpoint and set the appropriate token format
       if (config.url.includes('/taskboard/') || config.url.includes('/tasks/') || config.url.includes('/logout/')) {

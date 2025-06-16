@@ -1,3 +1,4 @@
+// This script triggers a redeploy of a Railway service instance using the Railway GraphQL API.
 const fetch = require('node-fetch');
 
 const TOKEN = process.argv[2];
