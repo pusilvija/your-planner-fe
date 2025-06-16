@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   DndContext,
   rectIntersection,
+  closestCorners,
   KeyboardSensor,
   PointerSensor,
   useSensor,
@@ -63,7 +64,7 @@ function TaskBoard() {
     <div className="taskboard-container">
       <DndContext
         sensors={sensors}
-        collisionDetection={rectIntersection}
+        collisionDetection={closestCorners}
         onDragStart={handleDragStart}
         onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
