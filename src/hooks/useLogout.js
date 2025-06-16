@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 
-import axiosInstance from '../axiosConfig.js';
+import axiosInstance from '../services/axiosConfig.js';
 
 
-const Logout = () => {
+const useLogout = () => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -21,4 +21,4 @@ const Logout = () => {
   return { handleLogout };
 };
 
-export default Logout;
+export default useLogout;

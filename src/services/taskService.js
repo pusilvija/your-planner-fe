@@ -1,4 +1,4 @@
-import axiosInstance from '../axiosConfig.js';
+import axiosInstance from './axiosConfig.js';
 
 
 export const updateTaskName = async (taskId, newName, setTasks) => {
@@ -49,4 +49,16 @@ export const createTask = async (taskData) => {
 
 export const updateTask = async (taskId, taskData) => {
   return axiosInstance.patch(`/tasks/${taskId}/`, taskData);
+};
+
+
+export const syncTasksToBackend = async (tasks) => {
+  try {
+    const response = await axiosInstance.post('/taskboard/', tasks);
+    console.log('Synced:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error syncing tasks:', error.response?.data || error.message);
+    throw error;
+  }
 };

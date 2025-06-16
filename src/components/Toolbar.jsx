@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Toolbar.css';
-import WeatherApp from './WeatherApp/WeatherApp.js';
-import Logout from './Auth/Logout.js';
+import WeatherApp from './WeatherApp.js';
+import useLogout from '../hooks/useLogout.js';
 import { useNavigate } from 'react-router-dom';
 
 function Toolbar() {
@@ -19,7 +19,7 @@ function Toolbar() {
     navigate('/tasks');
   };
 
-  const { handleLogout } = Logout();
+  const { handleLogout } = useLogout();
 
   return (
       <div className={`toolbar ${collapsed ? 'collapsed' : ''}`}>

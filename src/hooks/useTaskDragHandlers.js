@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { debounce } from 'lodash';
 
-import { STATUSES } from '../constants.js';
+import { STATUSES } from '../utils/constants.js';
 
 
 export default function useTaskDragHandlers(tasks, setTasks, setActiveTask, setDraggingTaskId, syncWithBackend) {

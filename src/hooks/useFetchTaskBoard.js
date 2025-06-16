@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
-import { fetchTaskBoard } from '../axiosConfig.js';
-import { STATUSES } from '../constants.js';
+import { fetchTaskBoard } from '../services/axiosConfig.js';
+import { STATUSES } from '../utils/constants.js';
 
 
 const useFetchTaskBoard = (setTasks) => {

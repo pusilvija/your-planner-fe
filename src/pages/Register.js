@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import axiosInstance from '../axiosConfig.js';
+import axiosInstance from '../services/axiosConfig.js';
 
 import './Register.css';
 

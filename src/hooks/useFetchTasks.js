@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { fetchTasks } from '../axiosConfig.js';
+import { fetchTasks } from '../services/axiosConfig.js';
 
 
 const useFetchTasks = (setTasks) => {

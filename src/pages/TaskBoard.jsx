@@ -16,14 +16,14 @@ import {
   sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable';
 
-import TaskColumn from './TaskColumn.jsx';
-import TaskCard from './TaskCard.jsx';
+import TaskColumn from '../components/TaskColumn.jsx';
+import TaskCard from '../components/TaskCard.jsx';
 
 import useTaskDragHandlers from '../hooks/useTaskDragHandlers.js';
 import useFetchTaskBoard from '../hooks/useFetchTaskBoard.js';
 import { updateTaskName } from '../services/taskService.js';
-import { syncTasksToBackend } from '../api.js';
-import { STATUSES } from '../constants.js';
+import { syncTasksToBackend } from '../services/taskService.js';
+import { STATUSES } from '../utils/constants.js';
 
 import './TaskBoard.css';
 
