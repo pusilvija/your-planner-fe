@@ -8,6 +8,7 @@ import {
   Register,
   TasksPage,
   LandingPage,
+  About,
 } from './pages';
 import { ProtectedRoute, MainLayout } from './components';
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/about" element={<About />} />
 
         {/* Protected Routes with Toolbar */}
         <Route
